@@ -12,8 +12,9 @@ public class Overlay extends Actor
      * Act - do whatever the Overlay wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act()
+    public void setOverlayImage()
     {
-        // Add your action code here.
+        GreenfootImage overlay = new GreenfootImage("crt overlay double.png");
+        setImage(overlay);
     }
 }

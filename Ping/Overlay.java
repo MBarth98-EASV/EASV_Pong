@@ -8,13 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Overlay extends Actor
 {
-    /**
-     * Act - do whatever the Overlay wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void setOverlayImage()
+    
+    public Overlay()
     {
-        GreenfootImage overlay = new GreenfootImage("crt overlay double.png");
-        setImage(overlay);
+     GreenfootImage overlay = new GreenfootImage("overlay.png");
+     setImage(overlay);
     }
+    
+
 }

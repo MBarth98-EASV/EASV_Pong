@@ -10,7 +10,7 @@ public class IntroWorld extends World
 {
     
     private static final int WORLD_WIDTH = 700;
-    private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 5;
+    private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 3;
 
 
     /**

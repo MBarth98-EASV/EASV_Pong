@@ -19,13 +19,13 @@ public class Sound  extends Actor
 
     
     public void playPingPong()
-    {
-        if (checkCollision = true && ping1 = false)
+    {   
+        if (ping1 = false)
         {
         Greenfoot.playSound("ping1.wav");
         ping1 = true;
         }
-        else if (checkCollision = true && ping1 = true)
+        else if (ping1 = true)
         Greenfoot.playSound("ping2.wav");
         ping1 = false;
     }

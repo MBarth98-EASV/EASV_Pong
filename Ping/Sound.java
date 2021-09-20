@@ -17,6 +17,10 @@ public class Sound  extends Actor
     {
     }
 
+    public void playWallHit()
+    {
+        Greenfoot.playSound("ballwallhit.wav");
+    }
     
     public void playPingPong()
     {   

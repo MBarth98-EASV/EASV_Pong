@@ -7,7 +7,7 @@ import greenfoot.*;
  * @author The teachers 
  * @version 1
  */
-public class Paddle extends CollidableActor
+public abstract class Paddle extends CollidableActor
 {
     private int width;
     private int height;
@@ -23,7 +23,7 @@ public class Paddle extends CollidableActor
         createImage();
     }
 
-    public void moveUp()
+    public final void moveUp()
     {
         if (getY() - (this.height / 2) > 0)
         {
@@ -31,7 +31,7 @@ public class Paddle extends CollidableActor
         }
     }
     
-    public void moveDown()
+    public final void moveDown()
     {
         if (getY() + (this.height / 2) < getWorld().getHeight())
         {
@@ -39,17 +39,7 @@ public class Paddle extends CollidableActor
         }
     }
     
-    public void move()
-    {
-        if (Greenfoot.isKeyDown("up"))
-        {
-            moveUp();
-        }
-        else if (Greenfoot.isKeyDown("down"))
-        {
-            moveDown();
-        }
-    }
+    public abstract void move(); 
     
     /**
      * Act - do whatever the Paddle wants to do. This method is called whenever

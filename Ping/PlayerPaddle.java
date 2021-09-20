@@ -16,12 +16,25 @@ public class PlayerPaddle extends Paddle
         super(HEIGHT, WIDTH);
     }
     
+    @Override
+    public final void move()
+    {
+        if (Greenfoot.isKeyDown("up"))
+        {
+            moveUp();
+        }
+        else if (Greenfoot.isKeyDown("down"))
+        {
+            moveDown();
+        }
+    }
+    
     /**
      * Act - do whatever the PlayerPaddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        // Add your action code here.
+        super.act();
     }    
 }

@@ -11,6 +11,11 @@ public class AIPaddle extends Paddle
     public static final int HEIGHT = 20;
     public static final int WIDTH = 100;
     
+    public void move()
+    {
+        
+    }
+    
     public AIPaddle()
     {
         super(HEIGHT, WIDTH);
@@ -21,6 +26,6 @@ public class AIPaddle extends Paddle
      */
     public void act() 
     {
-        // Add your action code here.
+        super.act();
     }    
 }

@@ -25,12 +25,18 @@ public class Paddle extends CollidableActor
 
     public void moveUp()
     {
-        setLocation(getX(), getY() - speed);
+        if (getY() - (this.height / 2) > 0)
+        {
+            setLocation(getX(), getY() - speed);
+        }
     }
     
     public void moveDown()
     {
-        setLocation(getX(), getY() + speed);
+        if (getY() + (this.height / 2) < getWorld().getHeight())
+        {
+            setLocation(getX(), getY() + speed);
+        }
     }
     
     public void move()

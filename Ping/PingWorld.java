@@ -10,7 +10,7 @@ import greenfoot.*;
 public class PingWorld extends World
 {
     private static final int WORLD_WIDTH = 700;
-    private static final int WORLD_HEIGHT = 500;
+    private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 5;
 
     /**
      * Constructor for objects of class PingWorld.

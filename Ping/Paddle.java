@@ -54,9 +54,7 @@ public class Paddle extends CollidableActor
      */
     private void createImage()
     {
-        GreenfootImage image = new GreenfootImage(width, height);
-        image.setColor(Color.WHITE);
-        image.fill();
+        GreenfootImage image = new GreenfootImage("paddlewithglow.png");
         setImage(image);
     }
     

@@ -8,8 +8,8 @@ import greenfoot.*;
  */
 public class IntroWorld extends World
 {
-    private static final int WORLD_WIDTH = 500;
-    private static final int WORLD_HEIGHT = 700;
+    private static final int WORLD_WIDTH = 700;
+    private static final int WORLD_HEIGHT = 500;
 
     /**
      * Constructor for objects of class IntroWorld.

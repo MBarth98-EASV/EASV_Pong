@@ -7,7 +7,7 @@ import greenfoot.*;
  * @author The teachers 
  * @version 1
  */
-public class Paddle extends Actor
+public class Paddle extends CollidableActor
 {
     private int width;
     private int height;
@@ -53,7 +53,6 @@ public class Paddle extends Actor
     {
         tryChangeDirection();
         move();
-        //setLocation(getX() + speed, getY());
     }    
 
     /**
@@ -85,5 +84,8 @@ public class Paddle extends Actor
         image.fill();
         setImage(image);
     }
+    
+    
+    
 
 }

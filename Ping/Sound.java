@@ -9,7 +9,7 @@ public class Sound  extends Actor
 {
     // instance variables - replace the example below with your own
     private int x;
-
+    private boolean ping1 = false;
     /**
      * Constructor for objects of class Sound
      */
@@ -17,14 +17,16 @@ public class Sound  extends Actor
     {
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
+    
     public void playPingPong()
-    {
+    {   
+        if (ping1 = false)
+        {
         Greenfoot.playSound("ping1.wav");
+        ping1 = true;
+        }
+        else if (ping1 = true)
+        Greenfoot.playSound("ping2.wav");
+        ping1 = false;
     }
 }

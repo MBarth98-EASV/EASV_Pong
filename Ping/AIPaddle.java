@@ -11,7 +11,8 @@ public class AIPaddle extends Paddle
     public static final int HEIGHT = 20;
     public static final int WIDTH = 100;
     
-    public void move()
+    @Override
+    public final void move()
     {
         
     }

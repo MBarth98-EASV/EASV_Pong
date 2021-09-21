@@ -31,12 +31,20 @@ public class ScoreCounterGlow extends ScoreCounter
             setLocation(185, 50);
             
         }
-        else if (ScoreKeeper.playerScore >= 9)
+        else if (ScoreKeeper.playerScore >= 9 && ScoreKeeper.playerScore < 100)
         {
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
             counterGlow.scale(65, 50);
             setLocation(195, 50);
+            
+        }
+        else if (ScoreKeeper.playerScore >= 99)
+        {
+            GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
+            setImage(counterGlow);
+            counterGlow.scale(93, 50);
+            setLocation(207, 50);
             
         }
     }

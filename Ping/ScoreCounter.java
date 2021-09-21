@@ -12,7 +12,8 @@ public class ScoreCounter extends Actor
     GreenfootImage image;
     int imageWidth;
     int imageHeight;
-    Font font  = new Font("Comic Sans MS", 40);
+    Font font  = new Font("Consolas", 40);
+    
     
     public ScoreCounter()
     {
@@ -40,6 +41,7 @@ public class ScoreCounter extends Actor
         image.drawString(scoreString,imageWidth/2, imageHeight/3);
         setImage(image);
     }
+    
     
     public void resetScore()
     {

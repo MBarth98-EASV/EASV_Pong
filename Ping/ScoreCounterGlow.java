@@ -8,12 +8,36 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ScoreCounterGlow extends ScoreCounter
 {
-    /**
-     * Act - do whatever the ScoreCounterGlow wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public ScoreCounterGlow()
+    {
+        GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
+        setImage(counterGlow);
+        counterGlow.scale(35, 50);
+        setLocation(195, 50);
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        scaleImage();
+    }
+    
+    public void scaleImage()
+    {
+        if (ScoreKeeper.playerScore <= 9)
+        {
+            GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
+            setImage(counterGlow);
+            counterGlow.scale(35, 50);
+            setLocation(185, 50);
+            
+        }
+        else if (ScoreKeeper.playerScore >= 9)
+        {
+            GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
+            setImage(counterGlow);
+            counterGlow.scale(65, 50);
+            setLocation(195, 50);
+            
+        }
     }
 }

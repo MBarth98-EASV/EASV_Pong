@@ -26,12 +26,22 @@ public abstract class Paddle extends CollidableActor
     private int width;
     private int height;
     
-    private double speed;
+    protected double speed;
+    
+    protected final boolean isAxisDisabledX = true;
+    protected final boolean isAxisDisabledY = false;
+
+    
     public double xPos;
     public double yPos;
+    public double xTarget;
+    public double yTarget;
     
     protected Effects glowEffect = new PaddleGlow();
 
+    protected java.time.Duration deltaTime = java.time.Duration.ZERO;
+    protected double deltaTimeMS = 1.0;
+    private java.time.Instant  beginTime = java.time.Instant.now();
     
         /**
      * Constructs a new paddle with the given dimensions.
@@ -62,6 +72,9 @@ public abstract class Paddle extends CollidableActor
                 break;
         }
         
+        this.xTarget = this.xPos;
+        this.yTarget = this.yPos;
+        
         createImage();
     }
     
@@ -72,23 +85,27 @@ public abstract class Paddle extends CollidableActor
 
     public final void moveUp()
     {
-        if (getY() - (this.height / 2) > 0)
+        boolean isBelowTopEdge = (getY() - (this.height / 2) > 0);
+        
+        if (!isAxisDisabledY && isBelowTopEdge)
         {
             this.yPos -= this.speed;
-            setLocation((int)this.xPos, (int)this.yPos);
         }
     }
     
     public final void moveDown()
     {
-        if (getY() + (this.height / 2) < getWorld().getHeight())
+        boolean isAboveBottomEdge = getY() + (this.height / 2) < getWorld().getHeight();
+        
+        if (!isAxisDisabledY && isAboveBottomEdge)
         {
             this.yPos += this.speed;
-            setLocation((int)this.xPos, (int)this.yPos);
         }
     }
     
-    public abstract void move(); 
+    public abstract void moveKeys(); 
+    
+    public abstract void moveToTarget();
     
     /**
      * Act - do whatever the Paddle wants to do. This method is called whenever
@@ -96,11 +113,44 @@ public abstract class Paddle extends CollidableActor
      */
     public void act() 
     {
-        move();
+        moveKeys();
+        
+        computeNewTarget();
+       
+        
+        if ((xTarget != xPos) || (yTarget != yPos))
+        {
+            this.setLocation((int)this.xPos, (int)this.yPos);
+        }
+        
         glowEffect.setLocation((int)this.xPos, (int)this.yPos);
+        
         checkCollision();
+        
+        deltaTime = java.time.Duration.between(beginTime, java.time.Instant.now());
+        
+        if (deltaTime.toMillis() > 0 == true)
+        {
+            deltaTimeMS = 1 / deltaTime.toMillis();
+        }
+        
+        beginTime = java.time.Instant.now();
     }    
 
+    
+    private void computeNewTarget()
+    {
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        
+        if (mouse != null)
+        {
+            this.xTarget = mouse.getX();
+            this.yTarget = mouse.getY();  
+        
+            moveToTarget();
+        }
+    }
+    
     /**
      * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.
      */

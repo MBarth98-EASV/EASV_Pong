@@ -17,9 +17,16 @@ public class AIPaddle extends Paddle
     {
         this(SCREEN_POSITION.RIGHT);
     }
+
+    @Override
+    public final void moveToTarget()
+    {
+        return;
+    }
+
     
     @Override
-    public final void move()
+    public final void moveKeys()
     {
         java.util.List<Ball> balls = getWorld().getObjects(Ball.class);
         

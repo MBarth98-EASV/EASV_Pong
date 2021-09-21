@@ -8,7 +8,7 @@ public class Ball extends Mover
     
     public Ball()
     {
-        increaseSpeed(new Vector(25, 5)); //Increase speed of vector
+        increaseSpeed(new Vector(5, 5)); //IInit speed of vector
     }
     
     public void act()
@@ -22,9 +22,9 @@ public class Ball extends Mover
         if(isAtEdge())
         {
             if(getX() < 20 || getX() > getWorld().getWidth() - 20)
-            motion.setX((motion.getX() * -1));
+            motion.deflectX();
             if(getY() < 20 || getY() > getWorld().getHeight() - 20)
-            motion.setY((motion.getY() * -1));
+            motion.deflectY();
         }
     }
 }

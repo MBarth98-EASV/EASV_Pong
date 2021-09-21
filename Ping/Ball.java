@@ -33,9 +33,7 @@ public class Ball extends Actor
      */
     private void createImage()
     {
-        GreenfootImage ballImage = new GreenfootImage(BALL_SIZE,BALL_SIZE);
-        ballImage.setColor(Color.BLACK);
-        ballImage.fillOval(0, 0, BALL_SIZE, BALL_SIZE);
+        GreenfootImage ballImage = new GreenfootImage("ball.png");
         setImage(ballImage);
     }
 
@@ -56,7 +54,7 @@ public class Ball extends Actor
             checkBounceOffCeiling();
             checkRestart();
         }
-    }    
+    }  
 
     /**
      * Returns true if the ball is touching one of the side walls.
@@ -132,6 +130,8 @@ public class Ball extends Actor
             setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
         }
     }
+    
+    
 
     /**
      * Bounces the ball back from a vertical surface.
@@ -152,6 +152,7 @@ public class Ball extends Actor
         setRotation((360 - getRotation()+ randomness + 360) % 360);
         hasBouncedVertically = true;
     }
+    
 
     /**
      * Initialize the ball settings.
@@ -164,5 +165,6 @@ public class Ball extends Actor
         hasBouncedVertically = false;
         setRotation(Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH)+STARTING_ANGLE_WIDTH/2);
     }
-
+    
+    
 }

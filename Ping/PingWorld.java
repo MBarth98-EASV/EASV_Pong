@@ -9,8 +9,8 @@ import greenfoot.*;
  */
 public class PingWorld extends World
 {
-    private static final int WORLD_WIDTH = 500;
-    private static final int WORLD_HEIGHT = 700;
+    private static final int WORLD_WIDTH = 700;
+    private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 3;
 
     /**
      * Constructor for objects of class PingWorld.
@@ -18,13 +18,16 @@ public class PingWorld extends World
     public PingWorld(boolean gameStarted)
     {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1); 
+        // Adds Overlay object to world and set the paint order to put it on top.
+        setPaintOrder(Overlay.class, Paddle.class, Ball.class);
         if (gameStarted)
         {
-            GreenfootImage background = getBackground();
-            background.setColor(Color.BLACK);
+            GreenfootImage background = new GreenfootImage("bg90.png");
+            setBackground(background);
             // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
             addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new Paddle(100,20), 60, WORLD_HEIGHT - 50);
+            addObject(new PlayerPaddle(), 60, WORLD_HEIGHT/2);
+            addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         }
         else
         {

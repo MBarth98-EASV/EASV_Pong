@@ -6,11 +6,8 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class IntroWorld extends World
+public class IntroWorld extends GameWorld
 {
-    
-    private static final int WORLD_WIDTH = 700;
-    private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 3;
     private static boolean introWorldActive = true;
     private long lastAdded = System.currentTimeMillis();
     private boolean textDrawn;
@@ -20,7 +17,8 @@ public class IntroWorld extends World
      */
     public IntroWorld()
     {
-        super(WORLD_WIDTH, WORLD_HEIGHT, 1); 
+        super(); 
+        
         GreenfootImage background = new GreenfootImage("introworldbg.png");
         setBackground(background);
         
@@ -32,11 +30,11 @@ public class IntroWorld extends World
         addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
         // Adds two AI paddles.
-        Paddle player1AI = new AIPaddle();
-        Paddle player2AI = new AIPaddle();
+        Paddle player1AI = new AIPaddle(Paddle.SCREEN_POSITION.LEFT);
+        Paddle player2AI = new AIPaddle(Paddle.SCREEN_POSITION.RIGHT);
         
-        addObject(player1AI, 25, WORLD_HEIGHT/2);
-        addObject(player2AI, WORLD_WIDTH - 25, WORLD_HEIGHT / 2);
+        addObject(player1AI, (int)player1AI.xPos, (int)player1AI.yPos);
+        addObject(player2AI, (int)player2AI.xPos, (int)player2AI.yPos);
         
         player1AI.addGlow();
         player2AI.addGlow();

@@ -12,7 +12,14 @@ public abstract class Paddle extends CollidableActor
     private int width;
     private int height;
     private int speed = 2;
+    
+    protected PaddleGlow glowEffect = new PaddleGlow();
 
+    public void addGlow()
+    {
+       getWorld().addObject(this.glowEffect, 0, 0);
+    }
+    
     /**
      * Constructs a new paddle with the given dimensions.
      */
@@ -47,29 +54,11 @@ public abstract class Paddle extends CollidableActor
      */
     public void act() 
     {
-        tryChangeDirection();
+        glowEffect.setLocation(this.getX(), this.getY());
         move();
         checkCollision();
     }    
 
-    /**
-     * Will rotate the paddle 180 degrees if the paddle is at worlds edge.
-     */
-    private void tryChangeDirection()
-    {
-        /**
-         
-         
-        //Check to see if we are touching the outer boundaries of the world:
-        // IF we are touching the right boundary OR we are touching the left boundary:
-        if(getX() + width/2 >= getWorld().getWidth() || getX() - width/2 <= 0)
-        {
-            //Change our 'x' direction to the inverted direction:
-            dx = dx * -1;
-        }
-        
-        */
-    }
 
     /**
      * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.

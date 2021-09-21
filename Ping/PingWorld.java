@@ -26,10 +26,19 @@ public class PingWorld extends World
             setBackground(background);
             // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
             addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new PlayerPaddle(), 25, WORLD_HEIGHT/2);
+            
+            Paddle playerHuman = new PlayerPaddle();
+            Paddle playerAI = new AIPaddle();
+            
+            addObject(playerHuman, 25, WORLD_HEIGHT/2);
+            addObject(playerAI, WORLD_WIDTH - 25, WORLD_HEIGHT / 2);
+            
+            playerHuman.addGlow();
+            playerAI.addGlow();
+            
             addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new ScoreCounter(), 50, 80);
-            addObject(new PaddleGlow(), 25, WORLD_HEIGHT/2);
+            // addObject(new PaddleGlow(), 25, WORLD_HEIGHT/2);
         }
         else
         {

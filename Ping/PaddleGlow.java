@@ -18,15 +18,18 @@ public class PaddleGlow extends Actor
     
     public void act()
     {
-        /** Gets a list of every paddle object in the world, and returns the only paddle there is present.
-            Thereafter, it sets the location of the glow asset to be behind the paddle, and follows the paddle's movement.
-           */ 
-        List<PlayerPaddle> objects = getWorld().getObjects(PlayerPaddle.class);
+        if (false)
+        {
+            // Gets a list of every paddle object in the world, and returns the only paddle there is present.
+            //   Thereafter, it sets the location of the glow asset to be behind the paddle, and follows the paddle's movement.
+         
+            List<PlayerPaddle> objects = getWorld().getObjects(PlayerPaddle.class);
     
-        PlayerPaddle currentPaddle = objects.get(0);
-        int paddleX = currentPaddle.getX();
-        int paddleY = currentPaddle.getY();
+            PlayerPaddle currentPaddle = objects.get(0);
+            int paddleX = currentPaddle.getX();
+            int paddleY = currentPaddle.getY();
         
-        setLocation(paddleX, paddleY);
+            setLocation(paddleX, paddleY);
+        }
     }
 }

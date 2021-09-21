@@ -19,7 +19,7 @@ public class PingWorld extends World
     {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1); 
         // Adds Overlay object to world and set the paint order to put it on top.
-        setPaintOrder(Overlay.class, Paddle.class, Ball.class, BallGlow.class, PaddleGlow.class);
+        setPaintOrder(Overlay.class, Paddle.class, Ball.class);
         if (gameStarted)
         {
             GreenfootImage background = new GreenfootImage("bg90.png");
@@ -28,8 +28,7 @@ public class PingWorld extends World
             addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new PlayerPaddle(), 25, WORLD_HEIGHT/2);
             addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new PaddleGlow(), 25, WORLD_HEIGHT/2);
+            addObject(new ScoreCounter(), 50, 80);
         }
         else
         {

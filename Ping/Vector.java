@@ -8,6 +8,8 @@ public class Vector
     double dy = 0;
     double direction = 0;
     double length;
+    int x = 0;
+    int y = 0;
     
     public Vector()
     {
@@ -100,4 +102,25 @@ public class Vector
         setY((getY() * -1));
     }
     
+    public int setBallX(int newX)
+    {
+        x = newX;
+        return x;
+    }
+    
+    public int setBallY(int newY)
+    {
+        y = newY;
+        return y;
+    }
+    
+    public int getBallX()
+    {
+        return x;
+    }
+    
+    public int getBallY()
+    {
+        return y;
+    }
 }

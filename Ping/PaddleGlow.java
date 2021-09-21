@@ -7,10 +7,8 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class PaddleGlow extends PlayerPaddle
+public class PaddleGlow extends Actor
 {
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 100;
     
     public PaddleGlow()
     {

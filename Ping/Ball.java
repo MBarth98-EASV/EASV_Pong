@@ -15,6 +15,8 @@ public class Ball extends Mover
     
     public void act()
     {
+        motion.setBallX(getX());
+        motion.setBallY(getY());
         Colliding();
         edgeBounce();
         move();

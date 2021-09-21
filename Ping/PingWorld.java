@@ -25,11 +25,10 @@ public class PingWorld extends World
             GreenfootImage background = new GreenfootImage("bg90.png");
             setBackground(background);
             // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
-            addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+            addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new PlayerPaddle(), 25, WORLD_HEIGHT/2);
             addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new ScoreCounter(), 50, 80);
-            addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new PaddleGlow(), 25, WORLD_HEIGHT/2);
         }
         else
@@ -37,5 +36,5 @@ public class PingWorld extends World
             Greenfoot.setWorld(new IntroWorld());
         }
     }
-
+    
 }

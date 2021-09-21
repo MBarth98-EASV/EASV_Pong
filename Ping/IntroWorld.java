@@ -19,9 +19,14 @@ public class IntroWorld extends World
     public IntroWorld()
     {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1); 
-        GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.drawString("Intro world. Hit <enter> to start game...", WORLD_WIDTH / 2 - 100, WORLD_HEIGHT / 2);
+        GreenfootImage background = new GreenfootImage("introworldbg.png");
+        setBackground(background);
+        
+        drawText();
+        
+        setPaintOrder(Overlay.class, Paddle.class, Ball.class);
+        addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        
     }
     
     public void act()
@@ -31,6 +36,17 @@ public class IntroWorld extends World
         {
             Greenfoot.setWorld(new PingWorld(true));
         }
+    }
+    
+    private void drawText()
+    {
+        
+       GreenfootImage image = new GreenfootImage(getBackground());
+       Font font  = new Font("Consolas", 20);
+       image.setColor(Color.WHITE);
+       image.setFont(font);
+       image.drawString("Hit <enter> to start game...", WORLD_WIDTH / 4 + 25, WORLD_HEIGHT / 2 + 100);
+       setBackground(image);
     }
     
 }

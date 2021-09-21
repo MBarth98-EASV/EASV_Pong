@@ -4,102 +4,124 @@
  */
 public class Vector
 {
-    double dx = 0;
-    double dy = 0;
+    private double deltaX = 0;
+    private double deltaY = 0;
+    
     double direction = 0;
     double length;
+    
     int x = 0;
     int y = 0;
     
-    public Vector()
-    {
-    }
+    public Vector() {}
 
     public Vector(double direction, double length)
     {
        this.length = length;
-       this.direction = direction;
-       dx = length * Math.cos(Math.toRadians(direction));
-       dy = length * Math.sin(Math.toRadians(direction));    
+       
+       setDirection(direction);
+       // this.direction = direction;
+       // dx = length * Math.cos(Math.toRadians(direction));
+       // dy = length * Math.sin(Math.toRadians(direction));    
     }
 
     /**
      * Set the direction of this vector.
      */
-    public void setDirection(double direction) {
+    public void setDirection(double direction) 
+    {
         this.direction = direction;
-        dx = length * Math.cos(Math.toRadians(direction));
-        dy = length * Math.sin(Math.toRadians(direction));   
+        this.deltaX = this.length * Math.cos(Math.toRadians(direction));
+        this.deltaY = this.length * Math.sin(Math.toRadians(direction));   
     }
    
     /**
      * Add other vector to this vector.
      */
-    public void add(Vector other) {
-        dx += other.dx;
-        dy += other.dy;    
-        this.direction = Math.toDegrees(Math.atan2(dy, dx));
-        this.length = Math.sqrt(dx*dx+dy*dy);
+    public void add(Vector other) 
+    {
+        deltaX += other.deltaX;
+        deltaY += other.deltaY;
+        
+        double angle = Math.atan2(deltaY, deltaX);
+        
+        double deltaXSquared = (deltaX * deltaX);
+        double deltaYSquared = (deltaY * deltaY);
+        
+        this.direction = Math.toDegrees(angle);
+        this.length = Math.sqrt(deltaXSquared + deltaYSquared);
     }   
     
-    public void setX(double newX) //Sets new vector Y
-        {
-            dx = newX;
-        }
-    
-    public void setY(double newY) //Sets new vector Y
-        {
-            dy = newY;
-        }
+    /**
+     *  Sets new vector X
+     */ 
+    public void setDeltaX(double dx) 
+    {
+        deltaX = dx;
+    }
     
     /**
-     * Return the x offset of this vector.
+     *  Sets new vector Y
      */
-    public double getX() {
-        return dx;
+    public void setDeltaY(double dy) 
+    {
+        deltaY = dy;
+    }
+    
+    /**
+     *  Return the x offset of this vector.
+     */
+    public double getDeltaX() 
+    {
+        return deltaX;
     }
      
     /**
      * Return the y offset of this vector.
      */
-    public double getY() {
-        return dy;
+    public double getDeltaY() 
+    {
+        return deltaY;
     }
     
     /**
      * Return the current direction (in degrees).
      */
-    public double getDirection() {
+    public double getDirection() 
+    {
         return direction;
     }
     
     /**
      * Return the current length of the vector.
      */
-    public double getLength() {
+    public double getLength() 
+    {
         return length;
     }
     
     /**
      * Create a copy of this vector.
      */
-    public Vector copy() {
-        Vector copy = new Vector();
-        copy.dx = dx;
-        copy.dy = dy;
-        copy.direction = direction;
-        copy.length = length;
-        return copy;
+    public Vector copy() 
+    {
+        return new Vector(this.direction, this.length);
     }
     
-    public void deflectX() //Inverses delta X
+    /**
+     *  Inverse of delta x
+     */
+    public void deflectX()
     {
-        setX((getX() * -1));
+        this.deltaX *= -1;
     }
     
-    public void deflectY() //Inverses delta Y
+    /**
+     *  Inverse of delta y
+     */
+    public void deflectY()
     {
-        setY((getY() * -1));
+        this.deltaY *= -1;
     }
     
     public int setBallX(int newX)

@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
-
 public class Ball extends Mover
 {
     private static final int BALL_SIZE = 25;
+    
     private boolean isTouchingEdge = false; //Check if touching the walls again.
     public boolean hasBounced;
     private int ballReset;
@@ -21,7 +21,8 @@ public class Ball extends Mover
     {
         motion.setBallX(getX());
         motion.setBallY(getY());
-        Colliding();
+        
+        testForCollision();
         edgeBounce();
         move();
         
@@ -32,42 +33,49 @@ public class Ball extends Mover
         if(isAtEdge())
         {
             if(getX() < 20 || getX() > getWorld().getWidth() - 20)
-            motion.deflectX();
+            {
+                motion.deflectX();
+            }
+
             if(getY() < 20 || getY() > getWorld().getHeight() - 20)
-            motion.deflectY();
+            {
+                motion.deflectY();
+        
+            }
         }
     }
     
-    private void Colliding()
+    private void testForCollision()
     {
-        List<CollidableActor> objects = (getWorld().getObjects(CollidableActor.class));
-        for (CollidableActor object : objects)
+        List<CollidableActor> colliders = (getWorld().getObjects(CollidableActor.class));
+        
+        for (CollidableActor collider : colliders)
         {
-            object.checkCollision();
-            if (object.isTouchingBall == true && hasBounced == false)
+            collider.checkCollision();
+            
+            if (collider.isTouchingBall == true && hasBounced == false)
             {
                 hasBounced = true;
                 motion.deflectX();
-                if (object.getClass()==PlayerPaddle.class){
+                
+                if (collider.getClass() == PlayerPaddle.class)
+                {
                     ScoreKeeper.playerScore++;
                 }
             }
             else
             {
-                
-                if(ballReset  == getX())
+                if(ballReset == getX())
                 {
-                hasBounced = false;
-                
+                    hasBounced = false;
                 }
-                
             }
         }
     }
 
     private void createImage()
     {
-        GreenfootImage ballImage = new GreenfootImage(BALL_SIZE,BALL_SIZE);
+        GreenfootImage ballImage = new GreenfootImage(BALL_SIZE, BALL_SIZE);
         ballImage.setColor(Color.WHITE);
         ballImage.fillOval(0, 0, BALL_SIZE, BALL_SIZE);
         setImage(ballImage);

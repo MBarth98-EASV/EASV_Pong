@@ -14,7 +14,19 @@ public class AIPaddle extends Paddle
     @Override
     public final void move()
     {
+        java.util.List<Ball> balls = getWorld().getObjects(Ball.class);
         
+        for (Actor ball : balls)
+        {
+            if (ball.getY() < this.getY())
+            {
+                super.moveUp();
+            }
+            else
+            {
+                super.moveDown();
+            }
+        }
     }
     
     public AIPaddle()

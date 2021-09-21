@@ -9,14 +9,14 @@ public class Ball extends Mover
     
     public Ball()
     {
-        increaseSpeed(new Vector(5, 2)); //IInit speed of vector
+        increaseSpeed(new Vector(5, 2)); //Init speed of vector
         createImage();
     }
     
     public void act()
     {
-        motion.setBallX(getX());
         motion.setBallY(getY());
+        motion.setBallX(getX());
         Colliding();
         edgeBounce();
         move();
@@ -26,9 +26,9 @@ public class Ball extends Mover
     {
         if(isAtEdge())
         {
-            if(getX() < 20 || getX() > getWorld().getWidth() - 20)
+            if(getX() < 15 || getX() > getWorld().getWidth() - 15)
             motion.deflectX();
-            if(getY() < 20 || getY() > getWorld().getHeight() - 20)
+            if(getY() < 15 || getY() > getWorld().getHeight() - 15)
             motion.deflectY();
         }
     }
@@ -52,5 +52,10 @@ public class Ball extends Mover
         ballImage.setColor(Color.WHITE);
         ballImage.fillOval(0, 0, BALL_SIZE, BALL_SIZE);
         setImage(ballImage);
+    }
+    
+    private void adjustDirectionUp(int F)
+    {
+        motion.setDirection(motion.getDirection() + F);
     }
 }

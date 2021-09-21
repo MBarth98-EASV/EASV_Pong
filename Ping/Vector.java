@@ -1,5 +1,5 @@
 /**
- * A 2D vector.
+ * 2D vector.
  * 
  */
 public class Vector
@@ -11,11 +11,12 @@ public class Vector
     int x = 0;
     int y = 0;
     
+    
     public Vector()
     {
     }
 
-    public Vector(double direction, double length)
+    public Vector(double direction, double length) //Creates a vector
     {
        this.length = length;
        this.direction = direction;
@@ -23,24 +24,20 @@ public class Vector
        dy = length * Math.sin(Math.toRadians(direction));    
     }
 
-    /**
-     * Set the direction of this vector.
-     */
-    public void setDirection(double direction) {
+    public void setDirection(double direction) //Sets direction of this vector
+        {
         this.direction = direction;
         dx = length * Math.cos(Math.toRadians(direction));
         dy = length * Math.sin(Math.toRadians(direction));   
-    }
+        }
    
-    /**
-     * Add other vector to this vector.
-     */
-    public void add(Vector other) {
+    public void add(Vector other) // Add vector to this vector
+        {
         dx += other.dx;
         dy += other.dy;    
         this.direction = Math.toDegrees(Math.atan2(dy, dx));
         this.length = Math.sqrt(dx*dx+dy*dy);
-    }   
+        }   
     
     public void setX(double newX) //Sets new vector Y
         {
@@ -52,75 +49,65 @@ public class Vector
             dy = newY;
         }
     
-    /**
-     * Return the x offset of this vector.
-     */
-    public double getX() {
+    public double getX() //Returns the x offset of this vector
+        {
         return dx;
-    }
+        }
      
-    /**
-     * Return the y offset of this vector.
-     */
-    public double getY() {
+    public double getY() //Returns the y offset of this vector
+        {
         return dy;
-    }
+        }
     
-    /**
-     * Return the current direction (in degrees).
-     */
-    public double getDirection() {
+    public double getDirection() //returns the curret direction in degrees
+        {
         return direction;
-    }
+        }
     
-    /**
-     * Return the current length of the vector.
-     */
-    public double getLength() {
+    public double getLength() //Returns the current length of the vector
+        {
         return length;
-    }
+        }
     
-    /**
-     * Create a copy of this vector.
-     */
-    public Vector copy() {
+    public Vector copy() //Creates a copy of this vector
+        {
         Vector copy = new Vector();
         copy.dx = dx;
         copy.dy = dy;
         copy.direction = direction;
         copy.length = length;
         return copy;
-    }
+        }
     
     public void deflectX() //Inverses delta X
-    {
+        {
         setX((getX() * -1));
-    }
+        }
     
     public void deflectY() //Inverses delta Y
-    {
+        {
         setY((getY() * -1));
-    }
-    
-    public int setBallX(int newX)
-    {
-        x = newX;
-        return x;
-    }
-    
+        }
+        
+    public int getBallX() //Returns X of ball
+        {
+            return x;
+        }
+        
+    public int getBallY() //Returns Y of ball
+        {
+            return y;
+        }
+
+    public int setBallX(int newX) //Sets the position of the ball
+        {
+            x = newX;
+            return x;
+        }
+        
     public int setBallY(int newY)
-    {
-        y = newY;
-        return y;
-    }
-    
-    public int getBallX()
-    {
-        return x;
-    }
-    
-    public int getBallY()
-    {
-        return y;
-    }
+        {
+            y = newY;
+            return y;
+        }
 }

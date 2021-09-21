@@ -29,6 +29,7 @@ public class PingWorld extends World
             addObject(new PlayerPaddle(), 25, WORLD_HEIGHT/2);
             addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new ScoreCounter(), 50, 80);
+            addObject(new ScoreCounterGlow(), 70, 50);
             addObject(new PaddleGlow(), 25, WORLD_HEIGHT/2);
         }
         else

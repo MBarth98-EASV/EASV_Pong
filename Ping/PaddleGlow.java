@@ -7,20 +7,13 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class PaddleGlow extends Paddle
+public class PaddleGlow extends PlayerPaddle
 {
     public static final int HEIGHT = 20;
     public static final int WIDTH = 100;
     
-    @Override
-    public final void move()
-    {
-
-    }
-    
     public PaddleGlow()
     {
-        super(HEIGHT, WIDTH);
         GreenfootImage paddleglow = new GreenfootImage("paddleglow.png");
         setImage(paddleglow);
     }

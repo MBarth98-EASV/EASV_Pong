@@ -88,5 +88,16 @@ public class Vector
         copy.direction = direction;
         copy.length = length;
         return copy;
-    }    
+    }
+    
+    public void deflectX() //Inverses delta X
+    {
+        setX((getX() * -1));
+    }
+    
+    public void deflectY() //Inverses delta Y
+    {
+        setY((getY() * -1));
+    }
+    
 }

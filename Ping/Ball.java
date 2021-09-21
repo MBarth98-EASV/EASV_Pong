@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.List;
 
 
 public class Ball extends Mover
@@ -9,12 +9,13 @@ public class Ball extends Mover
     
     public Ball()
     {
-        increaseSpeed(new Vector(25, 5)); //Increase speed of vector
+        increaseSpeed(new Vector(5, 2)); //IInit speed of vector
         createImage();
     }
     
     public void act()
     {
+        Colliding();
         edgeBounce();
         move();
     }
@@ -24,13 +25,26 @@ public class Ball extends Mover
         if(isAtEdge())
         {
             if(getX() < 20 || getX() > getWorld().getWidth() - 20)
-            motion.setX((motion.getX() * -1));
+            motion.deflectX();
             if(getY() < 20 || getY() > getWorld().getHeight() - 20)
-            motion.setY((motion.getY() * -1));
+            motion.deflectY();
         }
     }
     
-        private void createImage()
+    private void Colliding()
+    {
+        List<CollidableActor> objects = (getWorld().getObjects(CollidableActor.class));
+        for (CollidableActor object : objects)
+        {
+            object.checkCollision();
+            if (object.isTouchingBall == true)
+            {
+                motion.deflectX();
+            }
+        }
+    }
+
+    private void createImage()
     {
         GreenfootImage ballImage = new GreenfootImage(BALL_SIZE,BALL_SIZE);
         ballImage.setColor(Color.WHITE);

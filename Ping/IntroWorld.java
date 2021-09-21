@@ -11,8 +11,10 @@ public class IntroWorld extends World
     
     private static final int WORLD_WIDTH = 700;
     private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 3;
-
-
+    private static boolean introWorldActive = true;
+    private long lastAdded = System.currentTimeMillis();
+    private boolean textDrawn;
+    
     /**
      * Constructor for objects of class IntroWorld.
      */
@@ -22,7 +24,6 @@ public class IntroWorld extends World
         GreenfootImage background = new GreenfootImage("introworldbg.png");
         setBackground(background);
         
-        drawText();
         
         setPaintOrder(Overlay.class, Paddle.class, Ball.class);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
@@ -31,9 +32,11 @@ public class IntroWorld extends World
     
     public void act()
     {
+        flashingText();
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter"))
         {
+            introWorldActive = false;
             Greenfoot.setWorld(new PingWorld(true));
         }
     }
@@ -49,4 +52,23 @@ public class IntroWorld extends World
        setBackground(image);
     }
     
+    private void flashingText()
+    {
+        long curTime = System.currentTimeMillis();
+        
+        if (curTime >= lastAdded + 700 && textDrawn == false) 
+        {
+        drawText();
+        textDrawn = true;
+        lastAdded = curTime;
+        }
+        else if (curTime >= lastAdded + 700 && textDrawn == true)
+        {
+        GreenfootImage background = new GreenfootImage("introworldbg.png");
+        setBackground(background);
+        textDrawn = false;
+        lastAdded = curTime;
+        }
 }
+}
+

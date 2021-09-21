@@ -4,11 +4,13 @@ import java.util.List;
 
 public class Ball extends Mover
 {
+    private static final int BALL_SIZE = 25;
     private boolean isTouchingEdge = false; //Check if touching the walls again.
     
     public Ball()
     {
         increaseSpeed(new Vector(5, 2)); //IInit speed of vector
+        createImage();
     }
     
     public void act()
@@ -32,13 +34,21 @@ public class Ball extends Mover
     private void Colliding()
     {
         List<CollidableActor> objects = (getWorld().getObjects(CollidableActor.class));
-            for (CollidableActor object : objects)
+        for (CollidableActor object : objects)
+        {
+            object.checkCollision();
+            if (object.isTouchingBall == true)
             {
-                object.checkCollision();
-                if (object.isTouchingBall == true)
-                {
-                    motion.deflectX();
-                }
+                motion.deflectX();
             }
+        }
+    }
+
+    private void createImage()
+    {
+        GreenfootImage ballImage = new GreenfootImage(BALL_SIZE,BALL_SIZE);
+        ballImage.setColor(Color.WHITE);
+        ballImage.fillOval(0, 0, BALL_SIZE, BALL_SIZE);
+        setImage(ballImage);
     }
 }

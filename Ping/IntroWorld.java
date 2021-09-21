@@ -25,8 +25,20 @@ public class IntroWorld extends World
         setBackground(background);
         
         
-        setPaintOrder(Overlay.class, Paddle.class, Ball.class);
+        setPaintOrder(Overlay.class, BallGlow.class, PaddleGlow.class, Paddle.class, Ball.class);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        
+        addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        
+        Paddle player1AI = new AIPaddle();
+        Paddle player2AI = new AIPaddle();
+        
+        addObject(player1AI, 25, WORLD_HEIGHT/2);
+        addObject(player2AI, WORLD_WIDTH - 25, WORLD_HEIGHT / 2);
+        
+        player1AI.addGlow();
+        player2AI.addGlow();
         
     }
     

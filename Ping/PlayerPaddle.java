@@ -7,13 +7,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class PlayerPaddle extends Paddle
-{
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 100;
+{   
+    public PlayerPaddle(SCREEN_POSITION position)
+    {
+        super(position, HEIGHT, WIDTH);
+    }
     
     public PlayerPaddle()
     {
-        super(HEIGHT, WIDTH);
+        this(SCREEN_POSITION.LEFT);
     }
     
     @Override

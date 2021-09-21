@@ -9,32 +9,73 @@ import greenfoot.*;
  */
 public abstract class Paddle extends CollidableActor
 {
-    private int width;
-    private int height;
-    private int speed = 2;
+    public static final int HEIGHT = 20;
+    public static final int WIDTH = 100;
     
-    protected PaddleGlow glowEffect = new PaddleGlow();
-
-    public void addGlow()
+    public static final int BASE_OFFSET_X = 25;
+    public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
+    
+    public static enum SCREEN_POSITION
     {
-       getWorld().addObject(this.glowEffect, 0, 0);
+        LEFT,
+        RIGHT
     }
     
-    /**
+    public static final double BASE_SPEED = 2.0;
+  
+    private int width;
+    private int height;
+    
+    private double speed;
+    public double xPos;
+    public double yPos;
+    
+    protected Effects glowEffect = new PaddleGlow();
+
+    
+        /**
      * Constructs a new paddle with the given dimensions.
      */
-    public Paddle(int width, int height)
+    public Paddle(SCREEN_POSITION position, int width, int height)
     {
+        this.speed = BASE_SPEED;
         this.width = width;
         this.height = height;
+        
+        switch (position)
+        {
+            case LEFT:
+            {
+                this.xPos = BASE_OFFSET_X;
+                this.yPos = BASE_OFFSET_Y;  
+            } 
+            break;
+            
+            case RIGHT:
+            {
+                this.xPos = GameWorld.WORLD_WIDTH - BASE_OFFSET_X;
+                this.yPos = BASE_OFFSET_Y; 
+            } 
+            break;
+            
+            default:
+                break;
+        }
+        
         createImage();
+    }
+    
+    public void addGlow()
+    {
+       getWorld().addObject(this.glowEffect, (int)xPos, (int)yPos);
     }
 
     public final void moveUp()
     {
         if (getY() - (this.height / 2) > 0)
         {
-            setLocation(getX(), getY() - speed);
+            this.yPos -= this.speed;
+            setLocation((int)this.xPos, (int)this.yPos);
         }
     }
     
@@ -42,7 +83,8 @@ public abstract class Paddle extends CollidableActor
     {
         if (getY() + (this.height / 2) < getWorld().getHeight())
         {
-            setLocation(getX(), getY() + speed);
+            this.yPos += this.speed;
+            setLocation((int)this.xPos, (int)this.yPos);
         }
     }
     
@@ -54,11 +96,10 @@ public abstract class Paddle extends CollidableActor
      */
     public void act() 
     {
-        glowEffect.setLocation(this.getX(), this.getY());
         move();
+        glowEffect.setLocation((int)this.xPos, (int)this.yPos);
         checkCollision();
     }    
-
 
     /**
      * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.
@@ -70,8 +111,4 @@ public abstract class Paddle extends CollidableActor
         image.fill();
         setImage(image);
     }
-    
-    
-    
-
 }

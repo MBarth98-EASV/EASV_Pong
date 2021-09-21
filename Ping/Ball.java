@@ -42,6 +42,9 @@ public class Ball extends Mover
             if (object.isTouchingBall == true)
             {
                 motion.deflectX();
+                if (object.getClass()==PlayerPaddle.class){
+                    ScoreKeeper.playerScore++;
+                }
             }
         }
     }

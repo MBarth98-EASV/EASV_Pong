@@ -9,12 +9,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class CollidableActor extends Actor
 {
     public boolean isTouchingBall;
-    public boolean hasBounced;
+    
     
     public CollidableActor()
     {
         isTouchingBall = false ;
-        hasBounced = false;
+        
     }
     
     /**
@@ -23,6 +23,7 @@ public class CollidableActor extends Actor
      */
     public void act()
     {
+        
         // Add your action code here.
     }
     
@@ -54,6 +55,8 @@ public class CollidableActor extends Actor
        }
        
     }
+    
+    
     
     
     

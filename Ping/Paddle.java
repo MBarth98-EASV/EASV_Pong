@@ -7,11 +7,11 @@ import greenfoot.*;
  * @author The teachers 
  * @version 1
  */
-public class Paddle extends CollidableActor
+public abstract class Paddle extends CollidableActor
 {
     private int width;
     private int height;
-    private int dx;
+    private int speed = 2;
 
     /**
      * Constructs a new paddle with the given dimensions.
@@ -20,10 +20,27 @@ public class Paddle extends CollidableActor
     {
         this.width = width;
         this.height = height;
-        dx = 1;
         createImage();
     }
 
+    public final void moveUp()
+    {
+        if (getY() - (this.height / 2) > 0)
+        {
+            setLocation(getX(), getY() - speed);
+        }
+    }
+    
+    public final void moveDown()
+    {
+        if (getY() + (this.height / 2) < getWorld().getHeight())
+        {
+            setLocation(getX(), getY() + speed);
+        }
+    }
+    
+    public abstract void move(); 
+    
     /**
      * Act - do whatever the Paddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -31,7 +48,7 @@ public class Paddle extends CollidableActor
     public void act() 
     {
         tryChangeDirection();
-        setLocation(getX() + dx, getY());
+        move();
         checkCollision();
     }    
 
@@ -40,6 +57,9 @@ public class Paddle extends CollidableActor
      */
     private void tryChangeDirection()
     {
+        /**
+         
+         
         //Check to see if we are touching the outer boundaries of the world:
         // IF we are touching the right boundary OR we are touching the left boundary:
         if(getX() + width/2 >= getWorld().getWidth() || getX() - width/2 <= 0)
@@ -47,6 +67,8 @@ public class Paddle extends CollidableActor
             //Change our 'x' direction to the inverted direction:
             dx = dx * -1;
         }
+        
+        */
     }
 
     /**
@@ -54,9 +76,7 @@ public class Paddle extends CollidableActor
      */
     private void createImage()
     {
-        GreenfootImage image = new GreenfootImage(width, height);
-        image.setColor(Color.WHITE);
-        image.fill();
+        GreenfootImage image = new GreenfootImage("paddlewithglow.png");
         setImage(image);
     }
     

@@ -8,7 +8,7 @@ import greenfoot.*;
 public class Sound  extends Actor
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private boolean wallHit = false;
     private boolean ping1 = false;
     /**
      * Constructor for objects of class Sound
@@ -17,11 +17,6 @@ public class Sound  extends Actor
     {
     }
 
-    public void playWallHit()
-    {
-        Greenfoot.playSound("ballwallhit.wav");
-    }
-    
     public void playPingPong()
     {   
         if (ping1 = false)
@@ -31,6 +26,18 @@ public class Sound  extends Actor
         }
         else if (ping1 = true)
         Greenfoot.playSound("ping2.wav");
+        ping1 = false;
+    }
+    
+    public void playWallHit()
+    {
+        if (wallHit = false)
+        {
+        Greenfoot.playSound("ballwallhit1.wav");
+        ping1 = true;
+        }
+        else if (wallHit = true)
+        Greenfoot.playSound("ballwallhit2.wav");
         ping1 = false;
     }
 }

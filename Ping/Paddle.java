@@ -49,6 +49,7 @@ public abstract class Paddle extends CollidableActor
     {
         tryChangeDirection();
         move();
+        checkCollision();
     }    
 
     /**

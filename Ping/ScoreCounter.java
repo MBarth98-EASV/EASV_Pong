@@ -41,6 +41,7 @@ public class ScoreCounter extends Actor
         setImage(image);
     }
     
+    
     public void resetScore()
     {
         ScoreKeeper.playerScore = 0;

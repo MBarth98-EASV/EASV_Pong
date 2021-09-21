@@ -31,6 +31,7 @@ public class IntroWorld extends World
         addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
+        // Adds two AI paddles.
         Paddle player1AI = new AIPaddle();
         Paddle player2AI = new AIPaddle();
         
@@ -40,11 +41,13 @@ public class IntroWorld extends World
         player1AI.addGlow();
         player2AI.addGlow();
         
+        
     }
     
     public void act()
     {
         flashingText();
+        
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter"))
         {
@@ -67,8 +70,10 @@ public class IntroWorld extends World
     private void flashingText()
     {
         long curTime = System.currentTimeMillis();
+        // Measures real-world time and alternates between drawing the text 
+        // and setting a background without the text. It will activate every 0,7 seconds.
         
-        if (curTime >= lastAdded + 700 && textDrawn == false) 
+        if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
         {
         drawText();
         textDrawn = true;
@@ -82,5 +87,16 @@ public class IntroWorld extends World
         lastAdded = curTime;
         }
 }
+
+    private void backgroundMusic()
+    {
+        GreenfootSound bgmusic = new GreenfootSound("music.wav");
+        bgmusic.playLoop();
+        String key = Greenfoot.getKey();
+        if (key != null && key.equals("enter"))
+        {
+        bgmusic.stop();
+        }
+    }
 }
 

@@ -8,9 +8,9 @@ import greenfoot.*;
  */
 public class IntroWorld extends GameWorld
 {
-    private static boolean introWorldActive = true;
     private long lastAdded = System.currentTimeMillis();
     private boolean textDrawn;
+    GreenfootSound bgmusic = new GreenfootSound("insertcoin bgmusic.wav");
     
     /**
      * Constructor for objects of class IntroWorld.
@@ -39,7 +39,7 @@ public class IntroWorld extends GameWorld
         player1AI.addGlow();
         player2AI.addGlow();
         
-        
+        backgroundMusic();
     }
     
     public void act()
@@ -49,7 +49,7 @@ public class IntroWorld extends GameWorld
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter"))
         {
-            introWorldActive = false;
+            bgmusic.stop();
             Greenfoot.setWorld(new PingWorld(true));
         }
     }
@@ -84,17 +84,12 @@ public class IntroWorld extends GameWorld
         textDrawn = false;
         lastAdded = curTime;
         }
-}
+    }
 
     private void backgroundMusic()
-    {
-        GreenfootSound bgmusic = new GreenfootSound("music.wav");
+    {   
+        bgmusic.setVolume(50);
         bgmusic.playLoop();
-        String key = Greenfoot.getKey();
-        if (key != null && key.equals("enter"))
-        {
-        bgmusic.stop();
-        }
-    }
+    }  
 }
 

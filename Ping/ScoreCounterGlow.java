@@ -13,7 +13,7 @@ public class ScoreCounterGlow extends ScoreCounter
         GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
         setImage(counterGlow);
         counterGlow.scale(35, 50);
-        setLocation(70, 50);
+        setLocation(195, 50);
     }
     
     public void act()
@@ -28,7 +28,7 @@ public class ScoreCounterGlow extends ScoreCounter
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
             counterGlow.scale(35, 50);
-            setLocation(60, 50);
+            setLocation(185, 50);
             
         }
         else if (ScoreKeeper.playerScore >= 9)
@@ -36,7 +36,7 @@ public class ScoreCounterGlow extends ScoreCounter
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
             counterGlow.scale(65, 50);
-            setLocation(70, 50);
+            setLocation(195, 50);
             
         }
     }

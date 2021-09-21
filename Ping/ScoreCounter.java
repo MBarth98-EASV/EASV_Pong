@@ -45,6 +45,6 @@ public class ScoreCounter extends Actor
     
     public void resetScore()
     {
-        ScoreKeeper.playerScore = 19;
+        ScoreKeeper.playerScore = 0;
     }
 }

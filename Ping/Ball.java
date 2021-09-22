@@ -42,6 +42,9 @@ public class Ball extends Mover
                 motion.deflectY();
         
             }
+            
+            Sound.playRandomHit();
+        
         }
     }
     
@@ -57,7 +60,7 @@ public class Ball extends Mover
             {
                 hasBounced = true;
                 motion.deflectX();
-                
+                Sound.playRandomPingPong();
                 if (collider.getClass() == PlayerPaddle.class)
                 {
                     ScoreKeeper.playerScore++;

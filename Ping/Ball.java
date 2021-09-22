@@ -8,6 +8,13 @@ public class Ball extends Mover
     private boolean isTouchingEdge = false; //Check if touching the walls again.
     public boolean hasBounced;
     private int ballReset;
+    private int dieConditionOne = 5;
+    private int dieConditionTwo = GameWorld.WORLD_WIDTH - 5;
+    private int xPos = GameWorld.WORLD_WIDTH/2;
+    private int yPos = GameWorld.WORLD_HEIGHT/2;
+    
+    protected Effects glowEffect = new BallGlow();
+
     
     public Ball()
     {
@@ -25,7 +32,8 @@ public class Ball extends Mover
         testForCollision();
         edgeBounce();
         move();
-        
+        getPosition();
+        checkForDeath();
     }
     
     private void edgeBounce()
@@ -46,6 +54,12 @@ public class Ball extends Mover
             Sound.playRandomHit();
         
         }
+    }
+    
+    private void getPosition()
+    {
+        xPos = getX();
+        yPos = getY();
     }
     
     private void testForCollision()
@@ -82,5 +96,19 @@ public class Ball extends Mover
         ballImage.setColor(Color.WHITE);
         ballImage.fillOval(0, 0, BALL_SIZE, BALL_SIZE);
         setImage(ballImage);
+    }
+    
+    public void addGlow()
+    {
+        getWorld().addObject(glowEffect, xPos, yPos);
+    }
+    
+    private void checkForDeath()
+    {
+        if( getX() <= dieConditionOne || getX() >= dieConditionTwo)
+        {
+            getWorld().removeObject(glowEffect);
+            getWorld().removeObject(this);
+        }
     }
 }

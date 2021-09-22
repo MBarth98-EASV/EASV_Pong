@@ -23,9 +23,12 @@ public class PingWorld extends GameWorld
         {
             GreenfootImage background = new GreenfootImage("bg90.png");
             setBackground(background);
-        
-            addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+            
+            //add ball with gloweffect
+            Ball ball = new Ball();
+            addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
+            ball.addGlow();
+            
             
             initializePlayers();
             

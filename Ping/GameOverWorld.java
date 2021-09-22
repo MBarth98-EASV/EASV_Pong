@@ -15,5 +15,8 @@ public class GameOverWorld extends GameWorld
      */
     public GameOverWorld()
     {
+        GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
+        setBackground(gameoverBG);
+        
     }
 }

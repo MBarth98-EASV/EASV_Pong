@@ -17,6 +17,7 @@ public class ScoreCounter extends Actor
     
     public ScoreCounter()
     {
+        resetScore();
         imageWidth = 1000;
         imageHeight = 100;
         image = new GreenfootImage(imageWidth , imageHeight);

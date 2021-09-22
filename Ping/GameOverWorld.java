@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class GameOverWorld here.
@@ -12,12 +13,11 @@ public class GameOverWorld extends GameWorld
     @Override
     public void ResetBackground() {}
 
-    /**
-     * Constructor for objects of class GameOverWorld.
-     * 
-     */
-    
+
+    private long lastAdded = System.currentTimeMillis();
     GreenfootSound gameOverSound = new GreenfootSound("gameover.wav");
+    GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
+    private boolean textDrawn;
     public GameOverWorld()
     {
         super(); 
@@ -27,9 +27,15 @@ public class GameOverWorld extends GameWorld
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2); //Adds and overlay than covers every object on screen.
         
         
-        GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
+        
         setBackground(gameoverBG);
         gameOverSound.play();
+    }
+   
+    
+    public void act()
+    {
+        flashingContinueText();
     }
     
     private void endScore()
@@ -47,6 +53,49 @@ public class GameOverWorld extends GameWorld
         else if (ScoreKeeper.playerScore >= 100 && ScoreKeeper.playerScore < 1000)
         {
         addObject(new EndingScore(), (getWidth()/2)-14, getHeight()/2+150);
+        }
+    }
+    
+    private void drawText()
+    {
+       // Draws text on top of the current background, and sets it as the background image.
+       GreenfootImage image = new GreenfootImage(getBackground());
+       Font font  = new Font("Consolas", 20);
+       image.setColor(Color.WHITE);
+       image.setFont(font);
+       image.drawString("Hit <enter> to continue", WORLD_WIDTH / 4 + 45, WORLD_HEIGHT / 2 + 195);
+       setBackground(image);
+    }
+    
+    private void flashingContinueText()
+    {
+        long curTime = System.currentTimeMillis();
+        // Measures real-world time and alternates between drawing the text 
+        // and setting a background without the text. It will activate every 0,7 seconds.
+        FlashingTextGlow flashGlow = new FlashingTextGlow();
+        
+        
+        if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
+        {
+        drawText();
+        addObject(flashGlow, getWidth()/2-2, 450);
+        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
+    
+        FlashingTextGlow currentglow = glow.get(0);
+        currentglow.getImage().scale(300, 60);
+        textDrawn = true;
+        lastAdded = curTime;
+        }
+        else if (curTime >= lastAdded + 700 && textDrawn == true)
+        {
+        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
+    
+        FlashingTextGlow currentglow = glow.get(0);
+        
+        removeObject(currentglow);
+        setBackground(gameoverBG);
+        textDrawn = false;
+        lastAdded = curTime;
         }
     }
 }

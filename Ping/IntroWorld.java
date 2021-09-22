@@ -71,7 +71,7 @@ public class IntroWorld extends GameWorld
        Font font  = new Font("Consolas", 20);
        image.setColor(Color.WHITE);
        image.setFont(font);
-       image.drawString("Hit <enter> to start game", WORLD_WIDTH / 4 + 38, WORLD_HEIGHT / 2 + 100);
+       image.drawString("Hit <enter> to start game", WORLD_WIDTH / 4 + 38, WORLD_HEIGHT / 2 + 165);
        setBackground(image);
     }
     
@@ -84,7 +84,7 @@ public class IntroWorld extends GameWorld
         if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
         {
         drawText();
-        addObject(flashGlow, 350, 357);
+        addObject(flashGlow, 350, 421);
         textDrawn = true;
         lastAdded = curTime;
         }

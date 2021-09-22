@@ -11,7 +11,7 @@ public class GameLevelCounter extends Actor
     GreenfootImage image;
     int imageWidth;
     int imageHeight;
-    Font font  = new Font("Consolas", 40);
+    Font font  = new Font("Consolas", 25);
     
     public GameLevelCounter()
     {

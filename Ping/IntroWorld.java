@@ -27,18 +27,19 @@ public class IntroWorld extends GameWorld
         setPaintOrder(Overlay.class, BallGlow.class, PaddleGlow.class, Paddle.class, Ball.class);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
-        addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-        addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
-        // Adds two AI paddles.
+        // Adds two AI paddles and a ball.
         Paddle player1AI = new AIPaddle(Paddle.SCREEN_POSITION.LEFT);
         Paddle player2AI = new AIPaddle(Paddle.SCREEN_POSITION.RIGHT);
+        Ball ball = new Ball();
         
         addObject(player1AI, (int)player1AI.xPos, (int)player1AI.yPos);
         addObject(player2AI, (int)player2AI.xPos, (int)player2AI.yPos);
+        addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
         player1AI.addGlow();
         player2AI.addGlow();
+        ball.addGlow();
         
         
     }

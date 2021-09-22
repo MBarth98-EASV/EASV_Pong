@@ -27,6 +27,10 @@ public class ScoreCounter extends Actor
     public void act()
     {
         drawScore();
+        if (Greenfoot.isKeyDown("g"))
+        {
+            Greenfoot.setWorld(new GameOverWorld());
+        }
     }
     
     /*
@@ -42,9 +46,11 @@ public class ScoreCounter extends Actor
         setImage(image);
     }
     
-    
     public void resetScore()
     {
         ScoreKeeper.playerScore = 0;
     }
+    
+    
+    
 }

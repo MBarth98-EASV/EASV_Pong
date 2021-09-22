@@ -9,7 +9,9 @@ import greenfoot.*;
 public class IntroWorld extends GameWorld
 {
     private long lastAdded = System.currentTimeMillis();
+    private long lastPlayed = System.currentTimeMillis();
     private boolean textDrawn;
+    GreenfootImage background = new GreenfootImage("introworldbg.png");
     GreenfootSound bgmusic = new GreenfootSound("insertcoin bgmusic.wav");
     
     /**
@@ -19,33 +21,33 @@ public class IntroWorld extends GameWorld
     {
         super(); 
         
-        GreenfootImage background = new GreenfootImage("introworldbg.png");
         setBackground(background);
         
         
         setPaintOrder(Overlay.class, BallGlow.class, PaddleGlow.class, Paddle.class, Ball.class);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
-        addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-        addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
-        // Adds two AI paddles.
+        // Adds two AI paddles and a ball.
         Paddle player1AI = new AIPaddle(Paddle.SCREEN_POSITION.LEFT);
         Paddle player2AI = new AIPaddle(Paddle.SCREEN_POSITION.RIGHT);
+        Ball ball = new Ball();
         
         addObject(player1AI, (int)player1AI.xPos, (int)player1AI.yPos);
         addObject(player2AI, (int)player2AI.xPos, (int)player2AI.yPos);
+        addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
         player1AI.addGlow();
         player2AI.addGlow();
+        ball.addGlow();
         
-        backgroundMusic();
+        
     }
     
     public void act()
     {
         flashingText();
-        
+        backgroundMusic();
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter"))
         {
@@ -56,12 +58,11 @@ public class IntroWorld extends GameWorld
     
     private void drawText()
     {
-        
        GreenfootImage image = new GreenfootImage(getBackground());
        Font font  = new Font("Consolas", 20);
        image.setColor(Color.WHITE);
        image.setFont(font);
-       image.drawString("Hit <enter> to start game...", WORLD_WIDTH / 4 + 25, WORLD_HEIGHT / 2 + 100);
+       image.drawString("Hit <enter> to start game", WORLD_WIDTH / 4 + 38, WORLD_HEIGHT / 2 + 100);
        setBackground(image);
     }
     
@@ -79,7 +80,6 @@ public class IntroWorld extends GameWorld
         }
         else if (curTime >= lastAdded + 700 && textDrawn == true)
         {
-        GreenfootImage background = new GreenfootImage("introworldbg.png");
         setBackground(background);
         textDrawn = false;
         lastAdded = curTime;
@@ -89,7 +89,17 @@ public class IntroWorld extends GameWorld
     private void backgroundMusic()
     {   
         bgmusic.setVolume(50);
-        bgmusic.playLoop();
+        
+        long curTimeTwo = System.currentTimeMillis();
+        // Measures real-world time and alternates between drawing the text 
+        // and setting a background without the text. It will activate every 0,7 seconds.
+        
+        if (curTimeTwo >= lastPlayed + 21500 || curTimeTwo >= 100 ) //21,5 seconds
+        {
+        bgmusic.play();
+        lastPlayed = curTimeTwo;
+        }
+        
     }  
 }
 

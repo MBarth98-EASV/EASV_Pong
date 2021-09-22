@@ -22,6 +22,8 @@ public class Sound
         "ballwallhit2.wav"
     }; 
     
+    private static final GreenfootSound boomSound = new GreenfootSound("ballboom.wav");
+    
     public static final void playRandomPingPong()
     {
         int index = Greenfoot.getRandomNumber(pongSounds.length);
@@ -36,6 +38,10 @@ public class Sound
         Greenfoot.playSound(hitSounds[index]);
     }
     
+    public static final void playBallBoom()
+    {
+        boomSound.play();
+    }
 
     public void playPingPong()
     {   

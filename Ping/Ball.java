@@ -119,7 +119,7 @@ public class Ball extends Mover
             Sound.playBallBoom();
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
-            Greenfoot.delay(50);
+            Greenfoot.delay(150);
             Greenfoot.setWorld( new GameOverWorld());
             
         }

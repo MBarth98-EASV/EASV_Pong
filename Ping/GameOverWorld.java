@@ -40,19 +40,23 @@ public class GameOverWorld extends GameWorld
     
     private void endScore()
     {
+        EndCounterGlow endGlow = new EndCounterGlow();
         if (ScoreKeeper.playerScore <= 9 && ScoreKeeper.playerScore >= 0)
         {
-        addObject(new EndingScore(), (getWidth()/2)-1, getHeight()/2+150);
+        addObject(new EndingScore(), (getWidth()/2)-2, getHeight()/2+155);
+        addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
         
         else if (ScoreKeeper.playerScore >= 10 && ScoreKeeper.playerScore < 100)
         {
-        addObject(new EndingScore(), (getWidth()/2)-8, getHeight()/2+150);
+        addObject(new EndingScore(), (getWidth()/2)-8, getHeight()/2+155);
+        addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
         
         else if (ScoreKeeper.playerScore >= 100 && ScoreKeeper.playerScore < 1000)
         {
-        addObject(new EndingScore(), (getWidth()/2)-14, getHeight()/2+150);
+        addObject(new EndingScore(), (getWidth()/2)-14, getHeight()/2+155);
+        addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
     }
     

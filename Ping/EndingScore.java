@@ -28,7 +28,7 @@ public class EndingScore extends Actor
         Font font2  = new Font("Consolas", 16);
         
         image.clear();
-        image.setColor(Color.BLACK);
+        image.setColor(Color.WHITE);
         image.setFont(font);
         image.drawRect(0, 0, image.getWidth()-1, image.getHeight()-1);
         image.drawString("Your final score",0, imageHeight/3);

@@ -8,6 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameOverWorld extends GameWorld
 {
+    
+    GreenfootSound gameOverSound = new GreenfootSound("gameover.wav");
     public GameOverWorld()
     {
         super(); 
@@ -19,7 +21,7 @@ public class GameOverWorld extends GameWorld
         
         GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
         setBackground(gameoverBG);
-        
+        gameOverSound.play();
     }
     
     

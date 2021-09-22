@@ -10,7 +10,7 @@ public class AIPaddle extends Paddle
 {
     public AIPaddle(SCREEN_POSITION position)
     {
-        super(position, HEIGHT, WIDTH);
+        super(position, false, HEIGHT, WIDTH);
     }
     
     public AIPaddle()
@@ -19,7 +19,7 @@ public class AIPaddle extends Paddle
     }
 
     @Override
-    public final void moveToTarget()
+    public final void moveToMouse()
     {
         return;
     }

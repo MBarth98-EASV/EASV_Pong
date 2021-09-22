@@ -9,45 +9,45 @@ import greenfoot.*;
  */
 public abstract class Paddle extends CollidableActor
 {
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 100;
-    
-    public static final int BASE_OFFSET_X = 25;
-    public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
-    
     public static enum SCREEN_POSITION
     {
         LEFT,
         RIGHT
     }
     
+    public static final int HEIGHT = 20;
+    public static final int WIDTH = 100;
+    public static final int BASE_OFFSET_X = 25;
+    public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
     public static final double BASE_SPEED = 2.0;
-  
-    private int width;
-    private int height;
-    
-    protected double speed;
-    
+   
     protected final boolean isAxisDisabledX = true;
     protected final boolean isAxisDisabledY = false;
 
-    
     public double xPos;
     public double yPos;
-    public double xTarget;
-    public double yTarget;
     
+    protected double speed;
+    protected double xTarget;
+    protected double yTarget;
+    protected double deltaTime = 1.0;
+    protected double beginTime = java.time.Instant.now().toEpochMilli();
     protected Effects glowEffect = new PaddleGlow();
-
-    protected java.time.Duration deltaTime = java.time.Duration.ZERO;
-    protected double deltaTimeMS = 1.0;
-    private java.time.Instant  beginTime = java.time.Instant.now();
+  
+    private int width;
+    private int height;    
+    private boolean isMouseControlled;
     
-        /**
-     * Constructs a new paddle with the given dimensions.
+    public abstract void moveKeys(); 
+    public abstract void moveToMouse();
+    
+    /**
+     *  Constructs a new basic paddle
      */
-    public Paddle(SCREEN_POSITION position, int width, int height)
+    public Paddle(SCREEN_POSITION position, boolean isMouseControlled, int width, int height)
     {
+        this.isMouseControlled = isMouseControlled;
+        
         this.speed = BASE_SPEED;
         this.width = width;
         this.height = height;
@@ -103,52 +103,44 @@ public abstract class Paddle extends CollidableActor
         }
     }
     
-    public abstract void moveKeys(); 
-    
-    public abstract void moveToTarget();
-    
     /**
      * Act - do whatever the Paddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        moveKeys();
-        
-        computeNewTarget();
-       
-        
-        if ((xTarget != xPos) || (yTarget != yPos))
-        {
-            this.setLocation((int)this.xPos, (int)this.yPos);
-        }
-        
-        glowEffect.setLocation((int)this.xPos, (int)this.yPos);
+        move();
         
         checkCollision();
         
-        deltaTime = java.time.Duration.between(beginTime, java.time.Instant.now());
-        
-        if (deltaTime.toMillis() > 0 == true)
-        {
-            deltaTimeMS = 1 / deltaTime.toMillis();
-        }
-        
-        beginTime = java.time.Instant.now();
+        computeDeltaTime();
     }    
 
-    
-    private void computeNewTarget()
+    private void move()
     {
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-        
-        if (mouse != null)
+        if (isMouseControlled)
         {
-            this.xTarget = mouse.getX();
-            this.yTarget = mouse.getY();  
-        
-            moveToTarget();
+            moveToMouse();
+        } 
+        else
+        {
+            moveKeys();
         }
+        
+        this.setLocation((int)this.xPos, (int)this.yPos);
+        glowEffect.setLocation((int)this.xPos, (int)this.yPos);
+    }
+    
+    private void computeDeltaTime()
+    {
+        deltaTime = java.time.Instant.now().toEpochMilli() -  beginTime;
+        
+        if (deltaTime > 0)
+        {
+            deltaTime = 1 / deltaTime;
+        }
+        
+        beginTime = java.time.Instant.now().toEpochMilli();
     }
     
     /**

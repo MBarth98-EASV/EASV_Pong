@@ -11,6 +11,7 @@ public class ScoreCounterGlow extends Effects
     {
         GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
         setImage(counterGlow);
+        counterGlow.setTransparency(40);
         counterGlow.scale(35, 50);
         
     }
@@ -27,6 +28,7 @@ public class ScoreCounterGlow extends Effects
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
             counterGlow.scale(35, 50);
+            counterGlow.setTransparency(99);
             setLocation(185, 50);
             
         }
@@ -35,6 +37,7 @@ public class ScoreCounterGlow extends Effects
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
             counterGlow.scale(65, 50);
+            counterGlow.setTransparency(99);
             setLocation(195, 50);
             
         }
@@ -43,6 +46,7 @@ public class ScoreCounterGlow extends Effects
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
             counterGlow.scale(93, 50);
+            counterGlow.setTransparency(99);
             setLocation(207, 50);
             
         }

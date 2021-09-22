@@ -13,6 +13,7 @@ public class FlashingTextGlow extends Effects
     {
         GreenfootImage flashglow = new GreenfootImage("flashingtext glow.png");
         setImage(flashglow);
+        flashglow.setTransparency(99);
     }
     
     /**

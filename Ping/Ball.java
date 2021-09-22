@@ -109,6 +109,7 @@ public class Ball extends Mover
         {
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
+            Sound.playBallBoom();
         }
     }
 }

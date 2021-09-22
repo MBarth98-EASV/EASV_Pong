@@ -12,6 +12,9 @@ public class GameOverWorld extends GameWorld
     {
         super(); 
         addObject(new EndingScore(), getWidth()/2, getHeight()/3);
+        GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
+        setBackground(gameoverBG);
+        
     }
     
     

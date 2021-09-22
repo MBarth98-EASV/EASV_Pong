@@ -10,9 +10,14 @@ public class PlayerPaddle extends Paddle
 {   
     
     
+    public PlayerPaddle(SCREEN_POSITION position, boolean useMouse)
+    {
+        super(position, useMouse, HEIGHT, WIDTH);
+    }
+    
     public PlayerPaddle(SCREEN_POSITION position)
     {
-        super(position, HEIGHT, WIDTH);
+        super(position, true, HEIGHT, WIDTH);
     }
     
     public PlayerPaddle()
@@ -21,17 +26,25 @@ public class PlayerPaddle extends Paddle
     }
 
     @Override
-    public final void moveToTarget()
+    public final void moveToMouse()
     {
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        
+        if (mouse != null)
+        {
+            super.xTarget = mouse.getX();
+            super.yTarget = mouse.getY();  
+        }
+        
         if (!this.isAxisDisabledX) // handle x component for movement
         {
             if (xPos > super.xTarget) // mouse is the right of current position
             {
-                xPos -= ((xPos - super.xTarget) + this.speed) * this.deltaTimeMS; 
+                xPos -= ((xPos - super.xTarget) + this.speed) * this.deltaTime; 
             }
             else // left side
             {
-                xPos += ((super.xTarget - xPos) + this.speed) * this.deltaTimeMS; 
+                xPos += ((super.xTarget - xPos) + this.speed) * this.deltaTime; 
             }
         }
         
@@ -39,11 +52,11 @@ public class PlayerPaddle extends Paddle
         {
             if (yPos < super.yTarget) // mouse is below the current position
             {
-                yPos -= ((yPos - super.yTarget) + this.speed) * this.deltaTimeMS; 
+                yPos -= ((yPos - super.yTarget) + this.speed) * this.deltaTime; 
             }
             else // above
             {
-                yPos += ((super.yTarget - yPos) + this.speed) * this.deltaTimeMS; 
+                yPos += ((super.yTarget - yPos) + this.speed) * this.deltaTime; 
             }
         }
     }

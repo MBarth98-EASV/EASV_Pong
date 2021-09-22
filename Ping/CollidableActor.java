@@ -27,17 +27,6 @@ public class CollidableActor extends Actor
         // Add your action code here.
     }
     
-    public void checkCollision(int x, int y, int width, int height)
-    {
-        if (getX() < x )
-        {
-            //isColliding = true;
-        }
-        else
-        {
-            //isColliding = false;
-        }
-    }
     
     /**
      * checks if the ball colides with any Collidable actor.
@@ -53,7 +42,7 @@ public class CollidableActor extends Actor
        {
            isTouchingBall = false;
        }
-       
+    
     }
     
     

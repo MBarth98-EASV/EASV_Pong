@@ -11,6 +11,14 @@ public class Ball extends Mover
     private int xValueResetMax = 400;
     private int scoreToSpeedUp = 10;
     private int addedSpeed = 2;
+    private int ballReset;
+    private int dieConditionOne = 5;
+    private int dieConditionTwo = GameWorld.WORLD_WIDTH - 5;
+    private int xPos = GameWorld.WORLD_WIDTH/2;
+    private int yPos = GameWorld.WORLD_HEIGHT/2;
+    
+    protected Effects glowEffect = new BallGlow();
+
     
     public Ball()
     {
@@ -27,7 +35,8 @@ public class Ball extends Mover
         testForCollision();
         edgeBounce();
         move();
-        
+        getPosition();
+        checkForDeath();
     }
        
     private void edgeBounce()
@@ -46,6 +55,12 @@ public class Ball extends Mover
             }
             Sound.playRandomHit();
         }
+    }
+    
+    private void getPosition()
+    {
+        xPos = getX();
+        yPos = getY();
     }
     
     private void testForCollision()
@@ -89,6 +104,18 @@ public class Ball extends Mover
     {
         if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
             increaseSpeed(new Vector(0,addedSpeed));    
+    public void addGlow()
+    {
+        getWorld().addObject(glowEffect, xPos, yPos);
+    }
+    
+    private void checkForDeath()
+    {
+        if( getX() <= dieConditionOne || getX() >= dieConditionTwo)
+        {
+            getWorld().removeObject(glowEffect);
+            getWorld().removeObject(this);
+            Sound.playBallBoom();
         }
     }
 }

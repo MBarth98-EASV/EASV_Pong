@@ -7,6 +7,10 @@ public class Ball extends Mover
     
     private boolean isTouchingEdge = false; //Check if touching the walls again.
     public boolean hasBounced;
+    private int xValueResetMin = 300;
+    private int xValueResetMax = 400;
+    private int scoreToSpeedUp = 10;
+    private int addedSpeed = 2;
     private int ballReset;
     private int dieConditionOne = 5;
     private int dieConditionTwo = GameWorld.WORLD_WIDTH - 5;
@@ -21,7 +25,6 @@ public class Ball extends Mover
         increaseSpeed(new Vector(5, 2)); //IInit speed of vector
         createImage();
         hasBounced = false;
-        ballReset= 350;
     }
     
     public void act()
@@ -35,7 +38,7 @@ public class Ball extends Mover
         getPosition();
         checkForDeath();
     }
-    
+       
     private void edgeBounce()
     {
         if(isAtEdge())
@@ -50,9 +53,7 @@ public class Ball extends Mover
                 motion.deflectY();
         
             }
-            
             Sound.playRandomHit();
-        
         }
     }
     
@@ -78,11 +79,12 @@ public class Ball extends Mover
                 if (collider.getClass() == PlayerPaddle.class)
                 {
                     ScoreKeeper.playerScore++;
+                    adjustSpeed();
                 }
             }
             else
             {
-                if(ballReset == getX())
+                if(getX() < xValueResetMax && getX() > xValueResetMin)
                 {
                     hasBounced = false;
                 }
@@ -98,6 +100,14 @@ public class Ball extends Mover
         setImage(ballImage);
     }
     
+    private void adjustSpeed()
+    {
+        if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
+            increaseSpeed(new Vector(0,addedSpeed));  
+            GameLevel.gameLevel ++;
+        }
+    }
+    
     public void addGlow()
     {
         getWorld().addObject(glowEffect, xPos, yPos);
@@ -107,9 +117,12 @@ public class Ball extends Mover
     {
         if( getX() <= dieConditionOne || getX() >= dieConditionTwo)
         {
+            Sound.playBallBoom();
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
-            Sound.playBallBoom();
+            Greenfoot.delay(150);
+            Greenfoot.setWorld( new GameOverWorld());
+            
         }
     }
 }

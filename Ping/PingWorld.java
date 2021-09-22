@@ -31,7 +31,7 @@ public class PingWorld extends GameWorld
             GreenfootImage background = new GreenfootImage("bg90.png");
             setBackground(background);
             
-            //add ball with gloweffect
+            //add ball with glow effect
             Ball ball = new Ball();
             addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
             ball.addGlow();
@@ -43,6 +43,9 @@ public class PingWorld extends GameWorld
             
             addObject(new ScoreCounter(), WORLD_WIDTH / 4, 80);
             addObject(new ScoreCounterGlow(),WORLD_WIDTH / 4, 80);
+            
+            addObject(new GameLevelCounter(),(WORLD_WIDTH/4)*3, 80);
+            addObject(new GameLevelGlow(), 573, 54);
         }
         else
         {

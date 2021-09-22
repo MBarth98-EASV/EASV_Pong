@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.List;
 
 /**
  * Write a description of class IntroWorld here
@@ -31,7 +32,7 @@ public class IntroWorld extends GameWorld
         
         
         setPaintOrder(Overlay.class, BallGlow.class, PaddleGlow.class, Paddle.class, Ball.class);
-        addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2); //Adds and overlay than covers every object on screen.
         
         
         // Adds two AI paddles and a ball.
@@ -43,6 +44,7 @@ public class IntroWorld extends GameWorld
         addObject(player2AI, (int)player2AI.xPos, (int)player2AI.yPos);
         addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
         
+        // Adds the glow effect that sits behind the objects and overlay.
         player1AI.addGlow();
         player2AI.addGlow();
         ball.addGlow();
@@ -57,13 +59,14 @@ public class IntroWorld extends GameWorld
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter"))
         {
-            bgmusic.stop();
+            bgmusic.stop(); //stops the music when entering a new world.
             Greenfoot.setWorld(new PingWorld(true));
         }
     }
     
     private void drawText()
     {
+       // Draws text on top of the current background, and sets it as the background image.
        GreenfootImage image = new GreenfootImage(getBackground());
        Font font  = new Font("Consolas", 20);
        image.setColor(Color.WHITE);
@@ -77,15 +80,21 @@ public class IntroWorld extends GameWorld
         long curTime = System.currentTimeMillis();
         // Measures real-world time and alternates between drawing the text 
         // and setting a background without the text. It will activate every 0,7 seconds.
-        
+        FlashingTextGlow flashGlow = new FlashingTextGlow();
         if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
         {
         drawText();
+        addObject(flashGlow, 350, 357);
         textDrawn = true;
         lastAdded = curTime;
         }
         else if (curTime >= lastAdded + 700 && textDrawn == true)
         {
+        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
+    
+        FlashingTextGlow currentglow = glow.get(0);
+        
+        removeObject(currentglow);
         setBackground(background);
         textDrawn = false;
         lastAdded = curTime;
@@ -97,13 +106,15 @@ public class IntroWorld extends GameWorld
         bgmusic.setVolume(50);
         
         long curTimeTwo = System.currentTimeMillis();
-        // Measures real-world time and alternates between drawing the text 
-        // and setting a background without the text. It will activate every 0,7 seconds.
+        // Measures real-world time and plays music when the world is initiated. 
+        // The music will repeat after it's done playing, which is 21500 milliSeconds, or 21,5 seconds.
+        // curTimeTwo is the measured realworld time, and lastPlayed is .
         
-        if (curTimeTwo >= lastPlayed + 21500 || curTimeTwo >= 100 ) //21,5 seconds
+        if (curTimeTwo >= lastPlayed + 21500 || curTimeTwo >= 100 ) //21,5 seconds or 0.1 seconds after the world is started.
         {
         bgmusic.play();
-        lastPlayed = curTimeTwo;
+        lastPlayed = curTimeTwo; //lastPlayed is set to the value of curTimeTwo, meaning another 21.5 seconds will pass before
+        // the code will be run again.
         }
         
     }  

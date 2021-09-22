@@ -21,20 +21,16 @@ public class EndingScore extends Actor
     public void drawFinalScore()
     {
         int imageWidth = 360;
-        int imageHeight = 300;
+        int imageHeight = 100;
         GreenfootImage image = new GreenfootImage(imageWidth , imageHeight);
         String scoreString = String.valueOf(ScoreKeeper.playerScore);
-        Font font  = new Font("Consolas", 40);
-        Font font2  = new Font("Consolas", 16);
+        Font font  = new Font("Consolas", 20);
+       
         
         image.clear();
         image.setColor(Color.WHITE);
         image.setFont(font);
-        image.drawRect(0, 0, image.getWidth()-1, image.getHeight()-1);
-        image.drawString("Your final score",0, imageHeight/3);
-        image.drawString(scoreString,imageWidth/2-20, image.getHeight()/2);
-        image.setFont(font2);
-        image.drawString("Press <Enter> to continue",image.getWidth()/5, image.getHeight()-30);
+        image.drawString(scoreString,imageWidth/2-4, image.getHeight()/2);
         setImage(image);
     }
     

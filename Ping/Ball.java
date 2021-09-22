@@ -103,7 +103,10 @@ public class Ball extends Mover
     private void adjustSpeed()
     {
         if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
-            increaseSpeed(new Vector(0,addedSpeed));    
+            increaseSpeed(new Vector(0,addedSpeed));  
+        }
+    }
+    
     public void addGlow()
     {
         getWorld().addObject(glowEffect, xPos, yPos);

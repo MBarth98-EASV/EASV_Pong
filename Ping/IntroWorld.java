@@ -14,6 +14,12 @@ public class IntroWorld extends GameWorld
     GreenfootImage background = new GreenfootImage("introworldbg.png");
     GreenfootSound bgmusic = new GreenfootSound("insertcoin bgmusic.wav");
     
+    @Override
+    public void ResetBackground()
+    {
+        setBackground(new GreenfootImage("introworldbg.png"));
+    }
+     
     /**
      * Constructor for objects of class IntroWorld.
      */

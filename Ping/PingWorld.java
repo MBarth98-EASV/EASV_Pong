@@ -9,6 +9,13 @@ import greenfoot.*;
  */
 public class PingWorld extends GameWorld
 {
+    
+     
+    @Override
+    public void ResetBackground()
+    {
+       setBackground(new GreenfootImage("bg90.png"));
+    }
     /**
      * Constructor for objects of class PingWorld.
      */

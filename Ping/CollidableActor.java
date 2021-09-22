@@ -8,13 +8,33 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class CollidableActor extends Actor
 {
-    public boolean isTouchingBall;
+           
+    public static enum CollisionEdge
+    {
+        NULL,
+        
+        X_UP,   // right most edge
+        X_DOWN, // left most edge
+        
+        Y_UP,   // top edge
+        Y_DOWN  // bottom edge
+    }
+        
+    public class CollisionData
+    {
+        public Actor target = null;
+        public CollisionEdge collisionDirection = CollisionEdge.NULL;
+    }
     
+    public boolean isTouchingBall;
+   
+    protected Box collisionMesh;
     
     public CollidableActor()
     {
         isTouchingBall = false ;
         
+        collisionMesh = new Box(0, 0, this.getImage().getHeight(), this.getImage().getWidth());
     }
     
     /**
@@ -22,11 +42,20 @@ public class CollidableActor extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
-    {
-        
-        // Add your action code here.
+    {       
+        collisionMesh.update(this.getX(), this.getY());
     }
     
+    
+    public CollisionData checkCollision(Ball source)
+    {
+        CollisionData data = new CollisionData();
+        
+        Box ballCollider = new Box(source.getX(), source.getY(), source.getImage().getHeight(), source.getImage().getWidth());
+        
+        
+        return data;
+    }
     
     /**
      * checks if the ball colides with any Collidable actor.
@@ -42,11 +71,5 @@ public class CollidableActor extends Actor
        {
            isTouchingBall = false;
        }
-    
     }
-    
-    
-    
-    
-    
 }

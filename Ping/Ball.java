@@ -68,7 +68,7 @@ public class Ball extends Mover
         
         for (CollidableActor collider : colliders)
         {
-            collider.checkCollision();
+            collider.checkCollision(this);
             
             if (collider.isTouchingBall == true && hasBounced == false)
             {

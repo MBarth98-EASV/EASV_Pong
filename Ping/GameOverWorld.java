@@ -8,6 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameOverWorld extends GameWorld
 {
+     
+    @Override
+    public void ResetBackground() {}
 
     /**
      * Constructor for objects of class GameOverWorld.

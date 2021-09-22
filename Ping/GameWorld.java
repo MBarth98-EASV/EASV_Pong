@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GameWorld extends World
+public abstract class GameWorld extends World
 {
     public static final int WORLD_WIDTH = 700;
     public static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 3;
@@ -20,4 +20,6 @@ public class GameWorld extends World
         // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
     }
+    
+    public abstract void ResetBackground();
 }

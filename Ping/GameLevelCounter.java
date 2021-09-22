@@ -1,21 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class scoreCounter here.
+ * Write a description of class GameLevelCounter here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ScoreCounter extends Actor
+public class GameLevelCounter extends Actor
 {
     GreenfootImage image;
     int imageWidth;
     int imageHeight;
     Font font  = new Font("Consolas", 40);
     
-    
-    public ScoreCounter()
+    public GameLevelCounter()
     {
         resetScore();
         imageWidth = 1000;
@@ -23,17 +21,18 @@ public class ScoreCounter extends Actor
         image = new GreenfootImage(imageWidth , imageHeight);
     }
     
+    /**
+     * Act - do whatever the GameLevelCounter wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
-        drawScore();
+        setGameLevel();
     }
     
-    /*
-     * Draws the score to the screen
-     */
-    public void drawScore()
+    private void setGameLevel()
     {
-        String scoreString = String.valueOf(ScoreKeeper.playerScore);
+        String scoreString = String.valueOf("level"+":" +GameLevel.gameLevel);
         image.clear();
         image.setColor(Color.WHITE);
         image.setFont(font);
@@ -41,11 +40,8 @@ public class ScoreCounter extends Actor
         setImage(image);
     }
     
-    public void resetScore()
+    private void resetScore()
     {
-        ScoreKeeper.playerScore = 0;
+        GameLevel.gameLevel = 0;
     }
-    
-    
-    
 }

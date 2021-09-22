@@ -104,6 +104,7 @@ public class Ball extends Mover
     {
         if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
             increaseSpeed(new Vector(0,addedSpeed));  
+            GameLevel.gameLevel ++;
         }
     }
     

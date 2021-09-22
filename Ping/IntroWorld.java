@@ -61,7 +61,7 @@ public class IntroWorld extends GameWorld
        Font font  = new Font("Consolas", 20);
        image.setColor(Color.WHITE);
        image.setFont(font);
-       image.drawString("Hit <enter> to start game...", WORLD_WIDTH / 4 + 25, WORLD_HEIGHT / 2 + 100);
+       image.drawString("Hit <enter> to start game", WORLD_WIDTH / 4 + 38, WORLD_HEIGHT / 2 + 100);
        setBackground(image);
     }
     

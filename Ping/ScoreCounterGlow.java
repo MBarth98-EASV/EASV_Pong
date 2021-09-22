@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * Write a description of class ScoreCounterGlow here.
  * 
@@ -13,7 +12,7 @@ public class ScoreCounterGlow extends Effects
         GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
         setImage(counterGlow);
         counterGlow.scale(35, 50);
-        setLocation(195, 50);
+        
     }
     
     public void act()

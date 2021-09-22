@@ -1,11 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class EndingScore here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class EndingScore extends Actor
 {
     public EndingScore()
@@ -15,7 +10,6 @@ public class EndingScore extends Actor
     
     public void act()
     {
-        goToIntro();
     }
     
     public void drawFinalScore()
@@ -26,7 +20,6 @@ public class EndingScore extends Actor
         String scoreString = String.valueOf(ScoreKeeper.playerScore);
         Font font  = new Font("Consolas", 20);
        
-        
         image.clear();
         image.setColor(Color.WHITE);
         image.setFont(font);
@@ -34,13 +27,5 @@ public class EndingScore extends Actor
         setImage(image);
     }
     
-    public void goToIntro()
-    {
-        String key = Greenfoot.getKey();
-        if (key != null && key.equals("enter"))
-        {
-            
-            Greenfoot.setWorld(new IntroWorld());
-        }
-    }
+    
 }

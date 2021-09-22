@@ -36,13 +36,12 @@ public class PingWorld extends GameWorld
             addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
             ball.addGlow();
             
-            
             initializePlayers();
             
             addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             
             addObject(new ScoreCounter(), WORLD_WIDTH / 4, 80);
-            addObject(new ScoreCounterGlow(),WORLD_WIDTH / 4, 80);
+            //addObject(new ScoreCounterGlow(),WORLD_WIDTH / 4, 80);
             
             addObject(new GameLevelCounter(),(WORLD_WIDTH/4)*3, 80);
             addObject(new GameLevelGlow(), 573, 54);

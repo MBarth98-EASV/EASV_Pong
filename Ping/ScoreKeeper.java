@@ -7,5 +7,5 @@
 public class ScoreKeeper  
 {
     public static int playerScore;
-    public static int player2Score;
+    public static int multiPlayerScore;
 }

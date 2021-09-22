@@ -12,8 +12,6 @@ public class GameOverWorld extends GameWorld
      
     @Override
     public void ResetBackground() {}
-
-
     private long lastAdded = System.currentTimeMillis();
     GreenfootSound gameOverSound = new GreenfootSound("gameover.wav");
     GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
@@ -26,37 +24,34 @@ public class GameOverWorld extends GameWorld
         endScore();
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2); //Adds and overlay than covers every object on screen.
         
-        
-        
         setBackground(gameoverBG);
         gameOverSound.play();
     }
-   
-    
     public void act()
     {
         flashingContinueText();
+        goToIntro();
     }
-    
+
     private void endScore()
     {
         EndCounterGlow endGlow = new EndCounterGlow();
         if (ScoreKeeper.playerScore <= 9 && ScoreKeeper.playerScore >= 0)
         {
-        addObject(new EndingScore(), (getWidth()/2)-2, getHeight()/2+155);
-        addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
+            addObject(new EndingScore(), (getWidth()/2)-2, getHeight()/2+155);
+            addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
         
         else if (ScoreKeeper.playerScore >= 10 && ScoreKeeper.playerScore < 100)
         {
-        addObject(new EndingScore(), (getWidth()/2)-8, getHeight()/2+155);
-        addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
+            addObject(new EndingScore(), (getWidth()/2)-8, getHeight()/2+155);
+            addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
         
         else if (ScoreKeeper.playerScore >= 100 && ScoreKeeper.playerScore < 1000)
         {
-        addObject(new EndingScore(), (getWidth()/2)-14, getHeight()/2+155);
-        addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
+            addObject(new EndingScore(), (getWidth()/2)-14, getHeight()/2+155);
+            addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
     }
     
@@ -81,25 +76,34 @@ public class GameOverWorld extends GameWorld
         
         if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
         {
-        drawText();
-        addObject(flashGlow, getWidth()/2-2, 450);
-        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
-    
-        FlashingTextGlow currentglow = glow.get(0);
-        currentglow.getImage().scale(300, 60);
-        textDrawn = true;
-        lastAdded = curTime;
+            drawText();
+            addObject(flashGlow, getWidth()/2-2, 450);
+            List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
+        
+            FlashingTextGlow currentglow = glow.get(0);
+            currentglow.getImage().scale(300, 60);
+            textDrawn = true;
+            lastAdded = curTime;
         }
         else if (curTime >= lastAdded + 700 && textDrawn == true)
         {
-        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
-    
-        FlashingTextGlow currentglow = glow.get(0);
+            List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
         
-        removeObject(currentglow);
-        setBackground(gameoverBG);
-        textDrawn = false;
-        lastAdded = curTime;
+            FlashingTextGlow currentglow = glow.get(0);
+            
+            removeObject(currentglow);
+            setBackground(gameoverBG);
+            textDrawn = false;
+            lastAdded = curTime;
+        }
+    }
+    public void goToIntro()
+    {
+        String key = Greenfoot.getKey();
+        if (key != null && key.equals("enter"))
+        {
+            
+            Greenfoot.setWorld(new IntroWorld());
         }
     }
 }

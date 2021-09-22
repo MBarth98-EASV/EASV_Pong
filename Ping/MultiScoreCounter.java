@@ -7,14 +7,14 @@ import greenfoot.GreenfootImage;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ScoreCounter extends Actor
+public class MultiScoreCounter extends Actor
 {
     private int imageWidth = 1000;
     private int imageHeight = 100;
     private boolean gotGlow;
     private Font font  = new Font("Consolas", 40);
     
-    public ScoreCounter()
+    public MultiScoreCounter()
     {
         resetScore();
         gotGlow = false;
@@ -40,7 +40,7 @@ public class ScoreCounter extends Actor
     public void drawScore()
     {
         GreenfootImage image = new GreenfootImage(imageWidth , imageHeight);
-        String scoreString = String.valueOf(ScoreKeeper.playerScore);
+        String scoreString = String.valueOf(ScoreKeeper.multiPlayerScore);
 
         image.clear();
         image.setColor(Color.WHITE);

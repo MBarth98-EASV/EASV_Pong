@@ -48,8 +48,6 @@ public class IntroWorld extends GameWorld
         player1AI.addGlow();
         player2AI.addGlow();
         ball.addGlow();
-        
-        
     }
     
     public void act()
@@ -62,6 +60,7 @@ public class IntroWorld extends GameWorld
             bgmusic.stop(); //stops the music when entering a new world.
             Greenfoot.setWorld(new PingWorld(true));
         }
+        goToMultiplayer();
     }
     
     private void drawText()
@@ -83,21 +82,21 @@ public class IntroWorld extends GameWorld
         FlashingTextGlow flashGlow = new FlashingTextGlow();
         if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
         {
-        drawText();
-        addObject(flashGlow, 350, 421);
-        textDrawn = true;
-        lastAdded = curTime;
+            drawText();
+            addObject(flashGlow, 350, 421);
+            textDrawn = true;
+            lastAdded = curTime;
         }
         else if (curTime >= lastAdded + 700 && textDrawn == true)
         {
-        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
-    
-        FlashingTextGlow currentglow = glow.get(0);
+            List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
         
-        removeObject(currentglow);
-        setBackground(background);
-        textDrawn = false;
-        lastAdded = curTime;
+            FlashingTextGlow currentglow = glow.get(0);
+            
+            removeObject(currentglow);
+            setBackground(background);
+            textDrawn = false;
+            lastAdded = curTime;
         }
     }
 
@@ -112,11 +111,19 @@ public class IntroWorld extends GameWorld
         
         if (curTimeTwo >= lastPlayed + 21500 || curTimeTwo >= 100 ) //21,5 seconds or 0.1 seconds after the world is started.
         {
-        bgmusic.play();
-        lastPlayed = curTimeTwo; //lastPlayed is set to the value of curTimeTwo, meaning another 21.5 seconds will pass before
-        // the code will be run again.
+            bgmusic.play();
+            lastPlayed = curTimeTwo; //lastPlayed is set to the value of curTimeTwo, meaning another 21.5 seconds will pass before
+            // the code will be run again.
         }
-        
     }  
+    
+    public void goToMultiplayer()
+    {
+        if (Greenfoot.isKeyDown("2"))
+        {
+            bgmusic.stop(); //stops the music when entering a new world.
+            Greenfoot.setWorld(new MultiplayerWorld());
+        }
+    }
 }
 

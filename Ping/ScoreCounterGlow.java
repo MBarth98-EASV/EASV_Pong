@@ -22,7 +22,7 @@ public class ScoreCounterGlow extends ScoreCounter
     }
     
     public void scaleImage()
-    {
+    {   // Sets the glow effect to be scaled and repositioned depending on how many digits the current score has.
         if (ScoreKeeper.playerScore <= 9)
         {
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");

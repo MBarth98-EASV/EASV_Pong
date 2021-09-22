@@ -15,7 +15,10 @@ public class GameOverWorld extends GameWorld
      */
     public GameOverWorld()
     {
-        GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
+        setPaintOrder(Overlay.class);
+        addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        
+        GreenfootImage gameoverBG = new GreenfootImage("gamoverbg.png");
         setBackground(gameoverBG);
         
     }

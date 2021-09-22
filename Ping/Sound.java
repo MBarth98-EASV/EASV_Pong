@@ -10,12 +10,14 @@ public class Sound
     private boolean wallHit = false;
     private boolean ping1 = false;
     
+    // Sounds for when a paddle hits the ball.
     private static final String[] pongSounds = new String[] 
     {
         "ping1.wav", 
         "ping2.wav"
     };
     
+    // Sound for when the ball hits a wall.
     private static final String[] hitSounds = new String[] 
     {
         "ballwallhit1.wav",
@@ -27,19 +29,20 @@ public class Sound
     public static final void playRandomPingPong()
     {
         int index = Greenfoot.getRandomNumber(pongSounds.length);
-        
+        // Picks a random sound from the given list of sounds. These are meant for when the ball hits a paddle.
         Greenfoot.playSound(pongSounds[index]);
     }
     
     public static final void playRandomHit()
     {
         int index = Greenfoot.getRandomNumber(hitSounds.length);
-        
+        // Picks a random sound fromt he given list of sounds. These are meant for when the ball hits a wall.
         Greenfoot.playSound(hitSounds[index]);
     }
     
     public static final void playBallBoom()
     {
+        // Sound for when the ball touches the wall behind the player. A death sound.
         boomSound.play();
     }
 

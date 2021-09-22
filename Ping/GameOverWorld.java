@@ -8,18 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameOverWorld extends GameWorld
 {
-
-    /**
-     * Constructor for objects of class GameOverWorld.
-     * 
-     */
     public GameOverWorld()
     {
-        setPaintOrder(Overlay.class);
-        addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-        
-        GreenfootImage gameoverBG = new GreenfootImage("gamoverbg.png");
+        super(); 
+        addObject(new EndingScore(), getWidth()/2, getHeight()/3);
+        GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
         setBackground(gameoverBG);
         
     }
+    
+    
 }

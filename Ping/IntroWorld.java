@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.List;
 
 /**
  * Write a description of class IntroWorld here
@@ -73,15 +74,21 @@ public class IntroWorld extends GameWorld
         long curTime = System.currentTimeMillis();
         // Measures real-world time and alternates between drawing the text 
         // and setting a background without the text. It will activate every 0,7 seconds.
-        
+        FlashingTextGlow flashGlow = new FlashingTextGlow();
         if (curTime >= lastAdded + 700 && textDrawn == false) //0,7 seconds
         {
         drawText();
+        addObject(flashGlow, 350, 357);
         textDrawn = true;
         lastAdded = curTime;
         }
         else if (curTime >= lastAdded + 700 && textDrawn == true)
         {
+        List<FlashingTextGlow> glow = getObjects(FlashingTextGlow.class);
+    
+        FlashingTextGlow currentglow = glow.get(0);
+        
+        removeObject(currentglow);
         setBackground(background);
         textDrawn = false;
         lastAdded = curTime;

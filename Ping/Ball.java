@@ -75,16 +75,39 @@ public class Ball extends Mover
         {
             CollidableActor.Vertex data = collider.checkCollision();
             
-
+            double lenght = 0;
+            
             if (collider.isTouchingBall == true && hasBounced == false)
             {
                 System.out.println("x: " + data.x);
                 System.out.println("y: " + data.y);
                 hasBounced = true;
                 motion.deflectX();
+                
+                lenght = motion.getLength();
+                
+                motion.setDirection(motion.getDirection() + (180 - (Greenfoot.getRandomNumber(61) - 30)));
+                                
+                /**
+              
+                
+                motion.setDeltaX(motion.getDeltaX() + 1);
+                
+                double deltaXSquared = (motion.getDeltaX() * motion.getDeltaX());
+                double deltaYSquared = (motion.getDeltaY() * motion.getDeltaY());
+                double test = Math.sqrt(deltaXSquared + deltaYSquared);
+                
+                motion.setLenght(test);
+                
+               
+                */
+                
+                //motion.setLenght(lenght * 2);
                 Sound.playRandomPingPong();
+                
                 if (collider.getClass() == PlayerPaddle.class)
                 {
+                    motion.setLenght(lenght);
                     ScoreKeeper.playerScore++;
                     adjustSpeed();
                 }
@@ -97,6 +120,7 @@ public class Ball extends Mover
                     hasBounced = false;
                 }
             }
+
         }
     }
 

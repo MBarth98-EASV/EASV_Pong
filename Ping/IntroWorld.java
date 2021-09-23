@@ -71,11 +71,15 @@ public class IntroWorld extends GameWorld
         if (key != null && key.equals("enter") && multiPlayer == false)
         {
             bgmusic.stop(); //stops the music when entering a new world.
+            Sound.playBallBoom();
+            Greenfoot.delay(80);
             Greenfoot.setWorld(new PingWorld(true));
         }
         else if (key != null && key.equals("enter") && multiPlayer == true)
         {
             bgmusic.stop(); //stops the music when entering a new world.
+            Sound.playBallBoom();
+            Greenfoot.delay(80);
             Greenfoot.setWorld(new MultiplayerWorld());
         }
         

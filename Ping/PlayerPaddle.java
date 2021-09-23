@@ -8,16 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class PlayerPaddle extends Paddle
 {   
-    
-    
     public PlayerPaddle(SCREEN_POSITION position, boolean useMouse)
     {
-        super(position, useMouse, HEIGHT, WIDTH);
+        super(position, useMouse, WIDTH, HEIGHT);
     }
     
     public PlayerPaddle(SCREEN_POSITION position)
     {
-        super(position, true, HEIGHT, WIDTH);
+        super(position, true, WIDTH, HEIGHT);
     }
     
     public PlayerPaddle()

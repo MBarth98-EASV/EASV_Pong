@@ -15,8 +15,8 @@ public abstract class Paddle extends CollidableActor
         RIGHT
     }
     
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 100;
+    public static final int WIDTH = 20;
+    public static final int HEIGHT = 100;
     public static final int BASE_OFFSET_X = 25;
     public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
     public static final double BASE_SPEED = 2.0;

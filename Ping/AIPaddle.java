@@ -13,7 +13,7 @@ public class AIPaddle extends Paddle
     
     public AIPaddle(SCREEN_POSITION position)
     {
-        super(position, false, HEIGHT, WIDTH);
+        super(position, false, WIDTH, HEIGHT);
     }
     
     public AIPaddle()

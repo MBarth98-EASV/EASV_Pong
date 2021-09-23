@@ -82,6 +82,7 @@ public class Ball extends Mover
                 System.out.println("y: " + data.y);
                 hasBounced = true;
                 motion.deflectX();
+                motion.setDirection(motion.getDirection() + (180 + (Greenfoot.getRandomNumber(60)-30)));
                 Sound.playRandomPingPong();
                 if (collider.getClass() == PlayerPaddle.class)
                 {

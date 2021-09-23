@@ -124,6 +124,16 @@ public class Vector
         this.deltaY *= -1;
     }
     
+    public double getX() //Returns the x offset of this vector
+    {
+        return deltaX;
+    }
+
+    public double getY() //Returns the y offset of this vector
+    {
+        return deltaY;
+    }
+    
     public int setBallX(int newX)
     {
         x = newX;

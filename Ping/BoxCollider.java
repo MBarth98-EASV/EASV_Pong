@@ -5,7 +5,7 @@
  * @version (a version number or a date)
  */
 
-public class Box
+public class BoxCollider
     {
         public Verticies corners;
         public Sides sides;
@@ -13,7 +13,7 @@ public class Box
         public int height  = 0;
         public int width   = 0;
         
-        public Box(int x, int y, int width, int height)
+        public BoxCollider(int x, int y, int width, int height)
         {
             this.width  = width;
             this.height = height;

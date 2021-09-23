@@ -4,35 +4,35 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Position<T>
+public class Position
 {
-    private T x;
-    private T y;
+    private double x;
+    private double y;
     
     public Position() {}
     
-    public Position(T x, T y) 
+    public Position(double x, double y) 
     {
          this.setX(x);
          this.setY(y);
     }
     
-    public T getX()
+    public double getX()
     {
         return x;
     }
     
-    public T getY()
+    public double getY()
     {
         return y;
     }
     
-    public void setX(T value)
+    public void setX(double value)
     {
         this.x = value;
     }
     
-    public void setY(T value)
+    public void setY(double value)
     {
         this.y = value;
     }

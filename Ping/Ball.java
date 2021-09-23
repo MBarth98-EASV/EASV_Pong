@@ -73,13 +73,13 @@ public class Ball extends Mover
         
         for (CollidableActor collider : colliders)
         {
-            CollidableActor.Vertex data = collider.checkCollision();
+            Position data = collider.checkCollision();
             
 
             if (collider.isTouchingBall == true && hasBounced == false)
             {
-                System.out.println("x: " + data.x);
-                System.out.println("y: " + data.y);
+                System.out.println("x: " + data.getX());
+                System.out.println("y: " + data.getY());
                 hasBounced = true;
                 motion.deflectX();
                 Sound.playRandomPingPong();

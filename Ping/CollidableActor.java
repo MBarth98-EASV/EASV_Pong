@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class CollidableActor extends Actor
 {
-           
     public static enum NormalEdge
     {
         NULL,
@@ -23,34 +22,14 @@ public class CollidableActor extends Actor
     public boolean isTouchingBall;
     protected NormalEdge normal;
    
-    protected Box collisionMesh;
+    protected BoxCollider collisionMesh;
     
     public CollidableActor()
     {
         isTouchingBall = false ;
         
-        collisionMesh = new Box(0, 0, this.getImage().getHeight(), this.getImage().getWidth());
-        
+        collisionMesh = new BoxCollider(0, 0, this.getImage().getHeight(), this.getImage().getWidth());
     }
-    
-    public class Vertex
-        {
-            public int x;
-            public int y;
-        
-            public Vertex() {}
-        
-            public Vertex(int x, int y)
-            {
-                this.set(x, y);
-            }
-        
-            public void set(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-        }
     
     /**
      * Act - do whatever the ColiderCollector wants to do. This method is called whenever
@@ -74,16 +53,13 @@ public class CollidableActor extends Actor
         }
     }
     
-    public Vertex checkCollision(Ball source)
-    {
-        
-        CollisionData data = new CollisionData();
-        
-        Box ballCollider = new Box(source.getX(), source.getY(), source.getImage().getHeight(), source.getImage().getWidth());
+    public Position checkCollision(Ball source)
+    {        
+        BoxCollider ballCollider = new BoxCollider(source.getX(), source.getY(), source.getImage().getHeight(), source.getImage().getWidth());
         
         boolean inVerticalRange = (collisionMesh.sides.top < ballCollider.sides.top) && (ballCollider.sides.top < collisionMesh.sides.bottom);
         
-     
+
         
         if (inVerticalRange) // a collision is possible
         {
@@ -101,15 +77,16 @@ public class CollidableActor extends Actor
             }
         }
         
-        return new Vertex(this.getX(), this.getY());
+        return new Position(this.getX(), this.getY());
     }
     
     /**
      * checks if the ball colides with any Collidable actor.
      */
-    public Vertex checkCollision()
+    public Position checkCollision()
     {
        Actor ball = getOneIntersectingObject(Ball.class);
+
        if (ball != null)
        {
            isTouchingBall = true;
@@ -119,6 +96,6 @@ public class CollidableActor extends Actor
            isTouchingBall = false;
        }
        
-       return new Vertex(this.getX(), this.getY());
+       return new Position(this.getX(), this.getY());
     }
 }

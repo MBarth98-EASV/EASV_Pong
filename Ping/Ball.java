@@ -20,7 +20,6 @@ public class Ball extends Mover
 
     public boolean hasBounced;
 
-    private int edgeHitCounter = 0;
     private int scoreToSpeedUp = 10;
     private int addedSpeed = 2;
     private int dieConditionOne = 5;
@@ -67,9 +66,7 @@ public class Ball extends Mover
                 motion.deflectY();
         
             }
-            Sound.playRandomHit();
-            edgeHitCounter++;
-            
+            Sound.playRandomHit();            
         }
     }
     
@@ -119,8 +116,8 @@ public class Ball extends Mover
                         adjustSpeed();
                     }
                 }
+                
                 hasBounced = true;
-                edgeHitCounter = 0;
             }
             else
             {

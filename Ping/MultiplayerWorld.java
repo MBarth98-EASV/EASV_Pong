@@ -30,10 +30,33 @@ public class MultiplayerWorld extends GameWorld
         */
 
         //initializeScoreCounters();
+        
+        
+        //add ball with glow effect
+            Ball ball = new Ball();
+            addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
+            ball.addGlow();
+            
+            initializePlayers();
 
         
         addObject(new ScoreCounter(), WORLD_WIDTH / 4, 80);
         addObject(new MultiScoreCounter(), (WORLD_WIDTH / 4) * 3, 80);
+    }
+    
+    private void initializePlayers()
+    {
+        Paddle playerOne     = new PlayerPaddle();
+        Paddle playerTwo     = new Player2Paddle();
+            
+        addObject(playerOne, (int)playerOne.xPos, (int)playerOne.yPos);
+        addObject(playerTwo, (int)playerTwo.xPos, (int)playerTwo.yPos);
+            
+        playerOne.addGlow();
+        playerTwo.addGlow();
+        
+        addObject(new GameLevelCounter(),(WORLD_WIDTH/4)*3, 80);
+        addObject(new GameLevelGlow(), 573, 54);
     }
     
     public void act()

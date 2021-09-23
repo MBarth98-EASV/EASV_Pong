@@ -35,45 +35,29 @@ public class AIPaddle extends Paddle
         
         for (Actor ball : balls)
         {   
-            selectTarget(ball);
-            
-            if (isHit == false)
+            int distanceToBall = Math.abs(this.getX() - ball.getX());
+
+            if (distanceToBall < GameWorld.WORLD_HEIGHT / 4 * 3)
             {
                 movePaddleToCoord(ball.getX(), ball.getY());
             }
             else
             {
                 movePaddleToCenter();
-            }
-            
-        }
-    }
-    
-    private void selectTarget(Actor ball)
-    {
-        int distance = Math.abs(this.getX() - ball.getX()); 
-            
-        if (distance > GameWorld.WORLD_HEIGHT / 4 * 3 )
-        {
-            isHit = false;
-        }
-            
-        if (isTouchingBall == true)
-        {
-            isHit = true;
+            }  
         }
     }
     
     private void movePaddleToCoord(double x, double y)
     {
-      if (y < this.getY())
-      {
-         super.moveUp();
-      }
-      else
-      {
-          super.moveDown();
-      }
+        if (y < this.getY())
+        {
+           super.moveUp();
+        }
+        else
+        {
+            super.moveDown();
+        }
     }
     
     private void movePaddleToCenter()

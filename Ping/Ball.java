@@ -14,40 +14,40 @@ import java.util.Random;
  */
 public class Ball extends Mover
 {
-    
-    
     private static final int BALL_SIZE = 25;
-    
-    private boolean isTouchingEdge = false; //Check if touching the walls again.
+    private static final int SEARCH_RADIUS = (Math.min(GameWorld.WORLD_WIDTH, GameWorld.WORLD_HEIGHT) / 8) + BALL_SIZE;
+    private static final double SPRED_AMOUT = 9.0;
+
     public boolean hasBounced;
-    private int xValueResetMin = 300;
-    private int xValueResetMax = 400;
+
+    private int edgeHitCounter = 0;
     private int scoreToSpeedUp = 10;
     private int addedSpeed = 2;
-    private int ballReset;
     private int dieConditionOne = 5;
     private int dieConditionTwo = GameWorld.WORLD_WIDTH - 5;
-    private int xPos = GameWorld.WORLD_WIDTH/2;
-    private int yPos = GameWorld.WORLD_HEIGHT/2;
-    
+    Random randomNumberGenerator;;
+    private double xPos = GameWorld.WORLD_WIDTH / 2;
+    private double yPos = GameWorld.WORLD_HEIGHT / 2;
     
     protected Effects glowEffect = new BallGlow();
-
     
     public Ball()
     {
         increaseSpeed(new Vector(5, 2)); //IInit speed of vector
         createImage();
         hasBounced = false;
+
+        randomNumberGenerator = new Random(java.time.Instant.now().toEpochMilli());
     }
     
     public void act()
     {
         motion.setBallX(getX());
         motion.setBallY(getY());
-        
-        testForCollision();
+
+        collisionTest();
         edgeBounce();
+
         move();
         getPosition();
         checkForDeath();
@@ -68,6 +68,8 @@ public class Ball extends Mover
         
             }
             Sound.playRandomHit();
+            edgeHitCounter++;
+            
         }
     }
     
@@ -77,37 +79,54 @@ public class Ball extends Mover
         yPos = getY();
     }
     
-    private void testForCollision()
+    private void collisionTest()
     {
-        List<CollidableActor> colliders = (getWorld().getObjects(CollidableActor.class));
-        
-        for (CollidableActor collider : colliders)
-        {
-            Position data = collider.checkCollision();
-            
+        List<Paddle> collisionCandidates = getObjectsInRange(SEARCH_RADIUS, Paddle.class);
 
-            if (collider.isTouchingBall == true && hasBounced == false)
+        // only loop through the paddles in proximity
+        for (Paddle paddle : collisionCandidates)
+        {
+            if (this.intersects(paddle))
             {
-                System.out.println("x: " + data.getX());
-                System.out.println("y: " + data.getY());
-                hasBounced = true;
-                motion.deflectX();
-                Sound.playRandomPingPong();
-                if (collider.getClass() == PlayerPaddle.class)
+                // only run this once per alternating paddles (if multiple collisions are registered)
+                if (hasBounced == false)
                 {
-                    ScoreKeeper.playerScore++;
-                    adjustSpeed();
-                }
+                    motion.deflectX();
+                    double spred = randomNumberGenerator.nextDouble() * SPRED_AMOUT;
+
+                    if (randomNumberGenerator.nextBoolean())
+                    {
+                        if (this.getY() > GameWorld.WORLD_HEIGHT / 2)
+                        {
+                            motion.setDirection(motion.getDirection() + 180 - spred);
+                        }
+                        else
+                        {
+                            motion.setDirection(motion.getDirection() + 180 + spred);
+                        }
+                    }
+                    else
+                    {
+                       motion.setDirection(motion.getDirection() + 180);
+                    }
+                    
+
+                    Sound.playRandomPingPong();
                 
+                    if (paddle.getClass() == PlayerPaddle.class)
+                    {
+                        ScoreKeeper.playerScore++;
+                        adjustSpeed();
+                    }
+                }
+                hasBounced = true;
+                edgeHitCounter = 0;
             }
             else
             {
-                if(getX() < xValueResetMax && getX() > xValueResetMin)
-                {
-                    hasBounced = false;
-                }
+                hasBounced = false;
             }
-        }
+        }       
     }
 
     private void createImage()
@@ -121,14 +140,15 @@ public class Ball extends Mover
     private void adjustSpeed()
     {
         if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
-            increaseSpeed(new Vector(0,addedSpeed));  
+            increaseSpeed(new Vector(0, addedSpeed));  
+            
             GameLevel.gameLevel ++;
         }
     }
     
     public void addGlow()
     {
-        getWorld().addObject(glowEffect, xPos, yPos);
+        getWorld().addObject(glowEffect, (int)xPos, (int)yPos);
     }
     
     private void checkForDeath()
@@ -140,7 +160,6 @@ public class Ball extends Mover
             getWorld().removeObject(this);
             Greenfoot.delay(150);
             Greenfoot.setWorld( new GameOverWorld());
-            
         }
     }
 }

@@ -4,7 +4,11 @@ import java.util.List;
 /**
  * Write a description of class IntroWorld here
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class IntroWorld extends GameWorld
@@ -71,7 +75,7 @@ public class IntroWorld extends GameWorld
         if (key != null && key.equals("enter") && multiPlayer == false)
         {
             bgmusic.stop(); //stops the music when entering a new world.
-            Greenfoot.setWorld(new PingWorld(true));
+            Greenfoot.setWorld(new SinglePlayerWorld(true));
         }
         else if (key != null && key.equals("enter") && multiPlayer == true)
         {

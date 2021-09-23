@@ -1,13 +1,13 @@
 import greenfoot.*;
 
-
 /**
  * A paddle is an object that goes back and forth. Though it would be nice if balls would bounce of it.
  * 
- * @author The teachers 
- * @version 1
+ * 
+ * @author
+ * @version 2
  */
-public abstract class Paddle extends CollidableActor
+public abstract class Paddle extends Actor
 {
     public static enum SCREEN_POSITION
     {
@@ -18,7 +18,7 @@ public abstract class Paddle extends CollidableActor
     public static final int WIDTH = 20;
     public static final int HEIGHT = 100;
     public static final int BASE_OFFSET_X = 25;
-    public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
+    public static final int BASE_OFFSET_Y = SinglePlayerWorld.WORLD_HEIGHT / 2;
     public static final double BASE_SPEED = 2.0;
    
     protected final boolean isAxisDisabledX = true;
@@ -110,8 +110,6 @@ public abstract class Paddle extends CollidableActor
     public void act() 
     {
         move();
-        
-        checkCollision();
         
         computeDeltaTime();
     }    

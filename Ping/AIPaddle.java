@@ -3,14 +3,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class AIPaddle here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class AIPaddle extends Paddle
-
-{
-    private boolean isHit = false;
-    
+{   
     public AIPaddle(SCREEN_POSITION position)
     {
         super(position, false, WIDTH, HEIGHT);

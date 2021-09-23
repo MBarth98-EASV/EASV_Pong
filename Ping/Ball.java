@@ -1,7 +1,17 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
+import java.util.Random;
 
-
+/**
+ * Write a description of class AIPaddle here.
+ * 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
+ * @version (a version number or a date)
+ */
 public class Ball extends Mover
 {
     

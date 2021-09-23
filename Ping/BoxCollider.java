@@ -1,10 +1,13 @@
 /**
  * Write a description of class Box here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
-
 public class BoxCollider
     {
         public Verticies corners;

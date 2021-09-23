@@ -1,6 +1,13 @@
+
 /**
  * A 2D vector.
  * 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
+ * @version (a version number or a date)
  */
 public class Vector
 {

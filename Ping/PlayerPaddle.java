@@ -36,25 +36,25 @@ public class PlayerPaddle extends Paddle
         
         if (!this.isAxisDisabledX) // handle x component for movement
         {
-            if (xPos > super.xTarget) // mouse is the right of current position
+            if (this.xPos > super.xTarget) // mouse is to the right of current position
             {
-                xPos -= ((xPos - super.xTarget) + this.speed) * this.deltaTime; 
+                this.xPos -= ((this.xPos - super.xTarget) + this.speed) * this.deltaTime; 
             }
-            else // left side
+            else // mouse is to the right of current position
             {
-                xPos += ((super.xTarget - xPos) + this.speed) * this.deltaTime; 
+                this.xPos += ((super.xTarget - this.xPos) + this.speed) * this.deltaTime; 
             }
         }
         
         if (!this.isAxisDisabledY) // handle y component for movement
         {
-            if (yPos < super.yTarget) // mouse is below the current position
+            if (this.yPos < super.yTarget) // mouse is below the current position
             {
-                yPos -= ((yPos - super.yTarget) + this.speed) * this.deltaTime; 
+                this.yPos -= ((this.yPos - super.yTarget) + this.speed) * this.deltaTime; 
             }
-            else // above
+            else // mouse is above the current position
             {
-                yPos += ((super.yTarget - yPos) + this.speed) * this.deltaTime; 
+                this.yPos += ((super.yTarget - this.yPos) + this.speed) * this.deltaTime; 
             }
         }
     }

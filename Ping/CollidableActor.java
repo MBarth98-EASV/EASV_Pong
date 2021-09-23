@@ -107,7 +107,7 @@ public class CollidableActor extends Actor
     /**
      * checks if the ball colides with any Collidable actor.
      */
-    public void checkCollision()
+    public Vertex checkCollision()
     {
        Actor ball = getOneIntersectingObject(Ball.class);
        if (ball != null)
@@ -118,5 +118,7 @@ public class CollidableActor extends Actor
        {
            isTouchingBall = false;
        }
+       
+       return new Vertex(this.getX(), this.getY());
     }
 }

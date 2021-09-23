@@ -73,10 +73,9 @@ public class Ball extends Mover
         
         for (CollidableActor collider : colliders)
         {
-            CollidableActor.Vertex data = collider.checkCollision(this);
+            CollidableActor.Vertex data = collider.checkCollision();
             
-  
-            
+
             if (collider.isTouchingBall == true && hasBounced == false)
             {
                 System.out.println("x: " + data.x);

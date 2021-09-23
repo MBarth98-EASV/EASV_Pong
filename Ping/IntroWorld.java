@@ -12,6 +12,7 @@ public class IntroWorld extends GameWorld
     private long lastAdded = System.currentTimeMillis();
     private long lastPlayed = System.currentTimeMillis();
     private boolean textDrawn;
+    public static boolean multiPlayer = !false;
     GreenfootImage background = new GreenfootImage("introworldbg.png");
     GreenfootSound bgmusic = new GreenfootSound("insertcoin bgmusic.wav");
     
@@ -43,6 +44,7 @@ public class IntroWorld extends GameWorld
         addObject(player1AI, (int)player1AI.xPos, (int)player1AI.yPos);
         addObject(player2AI, (int)player2AI.xPos, (int)player2AI.yPos);
         addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
+        addObject(new MenuSelect(), 290, 348);
         
         // Adds the glow effect that sits behind the objects and overlay.
         player1AI.addGlow();
@@ -54,13 +56,29 @@ public class IntroWorld extends GameWorld
     {
         flashingText();
         backgroundMusic();
+        
         String key = Greenfoot.getKey();
-        if (key != null && key.equals("enter"))
+        
+        if (Greenfoot.isKeyDown("up"))
+        {
+            multiPlayer = false;
+        }
+        else if (Greenfoot.isKeyDown("down"))
+        {
+            multiPlayer = true;
+        }
+        
+        if (key != null && key.equals("enter") && multiPlayer == false)
         {
             bgmusic.stop(); //stops the music when entering a new world.
             Greenfoot.setWorld(new PingWorld(true));
         }
-        goToMultiplayer();
+        else if (key != null && key.equals("enter") && multiPlayer == true)
+        {
+            bgmusic.stop(); //stops the music when entering a new world.
+            Greenfoot.setWorld(new MultiplayerWorld());
+        }
+        
     }
     
     private void drawText()
@@ -123,6 +141,19 @@ public class IntroWorld extends GameWorld
         {
             bgmusic.stop(); //stops the music when entering a new world.
             Greenfoot.setWorld(new MultiplayerWorld());
+        }
+    }
+    
+    public void drawMenuSelect()
+    {
+        
+        if (Greenfoot.isKeyDown("b"))
+        {
+            multiPlayer = false;
+        }
+        else if (Greenfoot.isKeyDown("a"))
+        {
+            multiPlayer = true;
         }
     }
 }

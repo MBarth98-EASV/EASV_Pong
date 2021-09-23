@@ -7,7 +7,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class AIPaddle extends Paddle
+
 {
+    private boolean isHit = false;
+    
     public AIPaddle(SCREEN_POSITION position)
     {
         super(position, false, HEIGHT, WIDTH);
@@ -23,7 +26,6 @@ public class AIPaddle extends Paddle
     {
         return;
     }
-
     
     @Override
     public final void moveKeys()
@@ -31,15 +33,47 @@ public class AIPaddle extends Paddle
         java.util.List<Ball> balls = getWorld().getObjects(Ball.class);
         
         for (Actor ball : balls)
-        {
-            if (ball.getY() < this.getY())
+        {   
+            int dist = Math.abs(getX() - ball.getX()); 
+            if (dist > GameWorld.WORLD_HEIGHT/4 * 3 )
             {
-                super.moveUp();
+                isHit = false;
+            }
+            
+            if (isTouchingBall == true)
+            {
+                isHit = true;
+            }
+            
+            if ( isHit == false)
+            {
+                if (ball.getY() < this.getY())
+                {
+                    super.moveUp();
+                }
+                else
+                {
+                    super.moveDown();
+                }
             }
             else
             {
-                super.moveDown();
+                if( isHit == true)
+                {
+                    if ( getY() < GameWorld.WORLD_HEIGHT/2 )
+                    {
+                        super.moveDown();
+                    }
+                    else
+                    {   
+                        if ( getY() > GameWorld.WORLD_HEIGHT/2 )
+                        {
+                            super.moveUp();
+                        }
+                    }
+                }
             }
+            
         }
     }
     

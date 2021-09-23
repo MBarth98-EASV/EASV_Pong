@@ -52,6 +52,6 @@ public class MultiScoreCounter extends Actor
         
     public void resetScore()
     {
-        ScoreKeeper.multiPlayerScore = 10;
+        ScoreKeeper.multiPlayerScore = 0;
     }
 }

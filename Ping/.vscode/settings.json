@@ -6,5 +6,6 @@
     "images": true,
     "sounds": true,
     "README.TXT": true
-  }
+  },
+  "java.project.referencedLibraries": ["C:\\Program Files\\Greenfoot\\lib\\*"]
 }

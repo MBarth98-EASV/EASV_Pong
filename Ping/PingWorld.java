@@ -7,29 +7,44 @@ import greenfoot.*;
  * @author The teachers 
  * @version 1
  */
-public class PingWorld extends World
+public class PingWorld extends GameWorld
 {
-    private static final int WORLD_WIDTH = 700;
-    private static final int WORLD_HEIGHT = (WORLD_WIDTH / 4) * 3;
-
+    
+     
+    @Override
+    public void ResetBackground()
+    {
+       setBackground(new GreenfootImage("bg90.png"));
+    }
     /**
      * Constructor for objects of class PingWorld.
      */
     public PingWorld(boolean gameStarted)
     {
-        super(WORLD_WIDTH, WORLD_HEIGHT, 1); 
+        super(); 
+        
         // Adds Overlay object to world and set the paint order to put it on top.
-        setPaintOrder(Overlay.class, Paddle.class, Ball.class);
+        setPaintOrder(Overlay.class, Paddle.class, Ball.class, ScoreCounter.class, ScoreCounterGlow.class, PaddleGlow.class);
+        
         if (gameStarted)
         {
             GreenfootImage background = new GreenfootImage("bg90.png");
             setBackground(background);
-            // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
-            addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);addObject(new BallGlow(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new PlayerPaddle(), 25, WORLD_HEIGHT/2);
+            
+            //add ball with glow effect
+            Ball ball = new Ball();
+            addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
+            ball.addGlow();
+            
+            initializePlayers();
+            
             addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
-            addObject(new ScoreCounter(), 50, 80);
-            addObject(new PaddleGlow(), 25, WORLD_HEIGHT/2);
+            
+            addObject(new ScoreCounter(), WORLD_WIDTH / 4, 80);
+            //addObject(new ScoreCounterGlow(),WORLD_WIDTH / 4, 80);
+            
+            addObject(new GameLevelCounter(),(WORLD_WIDTH/4)*3, 80);
+            addObject(new GameLevelGlow(), 573, 54);
         }
         else
         {
@@ -37,4 +52,15 @@ public class PingWorld extends World
         }
     }
     
+    private void initializePlayers()
+    {
+        Paddle playerHuman  = new PlayerPaddle();
+        Paddle playerAI     = new AIPaddle();
+            
+        addObject(playerHuman, (int)playerHuman.xPos, (int)playerHuman.yPos);
+        addObject(playerAI, (int)playerAI.xPos, (int)playerAI.yPos);
+            
+        playerHuman.addGlow();
+        playerAI.addGlow();
+    }
 }

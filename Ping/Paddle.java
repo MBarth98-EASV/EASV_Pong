@@ -9,37 +9,99 @@ import greenfoot.*;
  */
 public abstract class Paddle extends CollidableActor
 {
-    private int width;
-    private int height;
-    private int speed = 2;
-
-    /**
-     * Constructs a new paddle with the given dimensions.
-     */
-    public Paddle(int width, int height)
+    public static enum SCREEN_POSITION
     {
+        LEFT,
+        RIGHT
+    }
+    
+    public static final int HEIGHT = 20;
+    public static final int WIDTH = 100;
+    public static final int BASE_OFFSET_X = 25;
+    public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
+    public static final double BASE_SPEED = 2.0;
+   
+    protected final boolean isAxisDisabledX = true;
+    protected final boolean isAxisDisabledY = false;
+
+    public double xPos;
+    public double yPos;
+    
+    protected double speed;
+    protected double xTarget;
+    protected double yTarget;
+    protected double deltaTime = 1.0;
+    protected double beginTime = java.time.Instant.now().toEpochMilli();
+    protected Effects glowEffect = new PaddleGlow();
+  
+    private int width;
+    private int height;    
+    private boolean isMouseControlled;
+    
+    public abstract void moveKeys(); 
+    public abstract void moveToMouse();
+    
+    /**
+     *  Constructs a new basic paddle
+     */
+    public Paddle(SCREEN_POSITION position, boolean isMouseControlled, int width, int height)
+    {
+        this.isMouseControlled = isMouseControlled;
+        
+        this.speed = BASE_SPEED;
         this.width = width;
         this.height = height;
+        
+        switch (position)
+        {
+            case LEFT:
+            {
+                this.xPos = BASE_OFFSET_X;
+                this.yPos = BASE_OFFSET_Y;  
+            } 
+            break;
+            
+            case RIGHT:
+            {
+                this.xPos = GameWorld.WORLD_WIDTH - BASE_OFFSET_X;
+                this.yPos = BASE_OFFSET_Y; 
+            } 
+            break;
+            
+            default:
+                break;
+        }
+        
+        this.xTarget = this.xPos;
+        this.yTarget = this.yPos;
+        
         createImage();
+    }
+    
+    public void addGlow()
+    {
+       getWorld().addObject(this.glowEffect, (int)xPos, (int)yPos);
     }
 
     public final void moveUp()
     {
-        if (getY() - (this.height / 2) > 0)
+        boolean isBelowTopEdge = (getY() - (this.height / 2) > 0);
+        
+        if (!isAxisDisabledY && isBelowTopEdge)
         {
-            setLocation(getX(), getY() - speed);
+            this.yPos -= this.speed;
         }
     }
     
     public final void moveDown()
     {
-        if (getY() + (this.height / 2) < getWorld().getHeight())
+        boolean isAboveBottomEdge = getY() + (this.height / 2) < getWorld().getHeight();
+        
+        if (!isAxisDisabledY && isAboveBottomEdge)
         {
-            setLocation(getX(), getY() + speed);
+            this.yPos += this.speed;
         }
     }
-    
-    public abstract void move(); 
     
     /**
      * Act - do whatever the Paddle wants to do. This method is called whenever
@@ -47,30 +109,40 @@ public abstract class Paddle extends CollidableActor
      */
     public void act() 
     {
-        tryChangeDirection();
         move();
+        
         checkCollision();
+        
+        computeDeltaTime();
     }    
 
-    /**
-     * Will rotate the paddle 180 degrees if the paddle is at worlds edge.
-     */
-    private void tryChangeDirection()
+    private void move()
     {
-        /**
-         
-         
-        //Check to see if we are touching the outer boundaries of the world:
-        // IF we are touching the right boundary OR we are touching the left boundary:
-        if(getX() + width/2 >= getWorld().getWidth() || getX() - width/2 <= 0)
+        if (isMouseControlled)
         {
-            //Change our 'x' direction to the inverted direction:
-            dx = dx * -1;
+            moveToMouse();
+        } 
+        else
+        {
+            moveKeys();
         }
         
-        */
+        this.setLocation((int)this.xPos, (int)this.yPos);
+        glowEffect.setLocation((int)this.xPos, (int)this.yPos);
     }
-
+    
+    private void computeDeltaTime()
+    {
+        deltaTime = java.time.Instant.now().toEpochMilli() -  beginTime;
+        
+        if (deltaTime > 0)
+        {
+            deltaTime = 1 / deltaTime;
+        }
+        
+        beginTime = java.time.Instant.now().toEpochMilli();
+    }
+    
     /**
      * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.
      */
@@ -81,8 +153,4 @@ public abstract class Paddle extends CollidableActor
         image.fill();
         setImage(image);
     }
-    
-    
-    
-
 }

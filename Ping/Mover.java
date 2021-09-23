@@ -12,9 +12,7 @@ public abstract class Mover extends Actor
     public double x = 0;
     public double y = 0;
     
-    public Mover()
-    {
-    }
+    public Mover() {}
     
     /**
      * Create new thing initialised with given speed.
@@ -29,8 +27,9 @@ public abstract class Mover extends Actor
      */
     public void move() 
     {
-        x = x + motion.getX();
-        y = y + motion.getY();
+        this.x += motion.getDeltaX();
+        this.y += motion.getDeltaY();
+        
         setLocation(x, y);
     }
     
@@ -38,20 +37,20 @@ public abstract class Mover extends Actor
     {
         this.x = x;
         this.y = y;
-        super.setLocation((int) x, (int) y);
+        super.setLocation((int)x, (int)y);
     }
     
     public void setLocation(int x, int y) 
     {
-        setLocation((double) x, (double) y);
+        setLocation((double)x, (double)y);
     }
 
     /**
      * Increase the speed with the given vector.
      */
-    public void increaseSpeed(Vector s) 
+    public void increaseSpeed(Vector modifier) 
     {
-        motion.add(s);
+        motion.add(modifier);
     }
     
     /**

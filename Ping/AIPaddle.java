@@ -8,19 +8,42 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AIPaddle extends Paddle
 {
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 100;
-    
-    @Override
-    public final void move()
+    public AIPaddle(SCREEN_POSITION position)
     {
-        
+        super(position, false, HEIGHT, WIDTH);
     }
     
     public AIPaddle()
     {
-        super(HEIGHT, WIDTH);
+        this(SCREEN_POSITION.RIGHT);
     }
+
+    @Override
+    public final void moveToMouse()
+    {
+        return;
+    }
+
+    
+    @Override
+    public final void moveKeys()
+    {
+        java.util.List<Ball> balls = getWorld().getObjects(Ball.class);
+        
+        for (Actor ball : balls)
+        {
+            if (ball.getY() < this.getY())
+            {
+                super.moveUp();
+            }
+            else
+            {
+                super.moveDown();
+            }
+        }
+    }
+    
+    
     /**
      * Act - do whatever the AIPaddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

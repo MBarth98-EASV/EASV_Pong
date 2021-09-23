@@ -9,18 +9,15 @@ import greenfoot.GreenfootImage;
  */
 public class ScoreCounter extends Actor
 {
-    GreenfootImage image;
-    int imageWidth;
-    int imageHeight;
-    Font font  = new Font("Comic Sans MS", 40);
+    private int imageWidth = 1000;
+    private int imageHeight = 100;
+    private boolean gotGlow;
+    private Font font  = new Font("Consolas", 40);
     
     public ScoreCounter()
     {
-        imageWidth = 1000;
-        imageHeight = 100;
-        image = new GreenfootImage(imageWidth , imageHeight);
-        
         resetScore();
+        gotGlow = false;
     }
     
     public void act()
@@ -28,19 +25,31 @@ public class ScoreCounter extends Actor
         drawScore();
     }
     
+    public void drawGlow()
+    {
+        if(!gotGlow)
+        {
+            getWorld().addObject(new ScoreCounterGlow(), getX(), getY());
+            gotGlow=true;
+        }
+    }
+    
     /*
      * Draws the score to the screen
      */
     public void drawScore()
     {
+        GreenfootImage image = new GreenfootImage(imageWidth , imageHeight);
         String scoreString = String.valueOf(ScoreKeeper.playerScore);
+
         image.clear();
         image.setColor(Color.WHITE);
         image.setFont(font);
         image.drawString(scoreString,imageWidth/2, imageHeight/3);
         setImage(image);
+        drawGlow();
     }
-    
+        
     public void resetScore()
     {
         ScoreKeeper.playerScore = 0;

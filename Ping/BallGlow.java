@@ -7,7 +7,7 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BallGlow extends Actor
+public class BallGlow extends Effects
 {
     public static int BallGlowX = 0;
     public static int BallGlowY = 0;

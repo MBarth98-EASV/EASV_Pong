@@ -6,14 +6,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Overlay extends Actor
+public class Overlay extends Effects
 {
     
     public Overlay()
     {
-     GreenfootImage overlay = new GreenfootImage("overlay.png");
-     setImage(overlay);
+        GreenfootImage overlay = new GreenfootImage("overlay.png");
+        setImage(overlay);
     }
-    
-
 }

@@ -22,14 +22,13 @@ public class Ball extends Mover
     
     public Ball()
     {
-        increaseSpeed(new Vector(5, 2)); //IInit speed of vector
+        increaseSpeed(new Vector(5, 2)); //Init speed of vector
         createImage();
         hasBounced = false;
     }
     
     public void act()
     {
-        motion.setBallX(getX());
         motion.setBallY(getY());
         
         testForCollision();

@@ -27,10 +27,10 @@ public class GameLevelCounter extends Actor
      */
     public void act()
     {
-        setGameLevel();
+        drawGameLevel();
     }
     
-    private void setGameLevel()
+    private void drawGameLevel()
     {
         String scoreString = String.valueOf("level"+":" +GameLevel.gameLevel);
         image.clear();

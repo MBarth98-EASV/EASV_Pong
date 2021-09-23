@@ -20,6 +20,7 @@ public class Ball extends Mover
     private int xPos = GameWorld.WORLD_WIDTH/2;
     private int yPos = GameWorld.WORLD_HEIGHT/2;
     
+    
     protected Effects glowEffect = new BallGlow();
 
     
@@ -88,6 +89,7 @@ public class Ball extends Mover
                     ScoreKeeper.playerScore++;
                     adjustSpeed();
                 }
+                
             }
             else
             {

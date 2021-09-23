@@ -34,49 +34,59 @@ public class AIPaddle extends Paddle
         
         for (Actor ball : balls)
         {   
-            int dist = Math.abs(getX() - ball.getX()); 
-            if (dist > GameWorld.WORLD_HEIGHT/4 * 3 )
-            {
-                isHit = false;
-            }
+            selectTarget(ball);
             
-            if (isTouchingBall == true)
+            if (isHit == false)
             {
-                isHit = true;
-            }
-            
-            if ( isHit == false)
-            {
-                if (ball.getY() < this.getY())
-                {
-                    super.moveUp();
-                }
-                else
-                {
-                    super.moveDown();
-                }
+                movePaddleToCoord(ball.getX(), ball.getY());
             }
             else
             {
-                if( isHit == true)
-                {
-                    if ( getY() < GameWorld.WORLD_HEIGHT/2 )
-                    {
-                        super.moveDown();
-                    }
-                    else
-                    {   
-                        if ( getY() > GameWorld.WORLD_HEIGHT/2 )
-                        {
-                            super.moveUp();
-                        }
-                    }
-                }
+                movePaddleToCenter();
             }
             
         }
     }
     
+    private void selectTarget(Actor ball)
+    {
+        int distance = Math.abs(this.getX() - ball.getX()); 
+            
+        if (distance > GameWorld.WORLD_HEIGHT / 4 * 3 )
+        {
+            isHit = false;
+        }
+            
+        if (isTouchingBall == true)
+        {
+            isHit = true;
+        }
+    }
+    
+    private void movePaddleToCoord(double x, double y)
+    {
+      if (y < this.getY())
+      {
+         super.moveUp();
+      }
+      else
+      {
+          super.moveDown();
+      }
+    }
+    
+    private void movePaddleToCenter()
+    {
+        if (getY() < GameWorld.WORLD_HEIGHT / 2)
+        {
+            super.moveDown();
+        }
+        else if (getY() > GameWorld.WORLD_HEIGHT / 2)
+        {
+            super.moveUp();
+        }
+        // else in center (do nothing)!!!
+    }
     
     /**
      * Act - do whatever the AIPaddle wants to do. This method is called whenever

@@ -29,7 +29,7 @@ public class GameLevelGlow extends Effects
         {
             GreenfootImage levelglow = new GreenfootImage("levelcounter glow.png");
             levelglow.scale(145, 52);
-            levelglow.setTransparency(99);
+            levelglow.setTransparency(150);
             setImage(levelglow);
             setLocation(573, 56);
             
@@ -38,7 +38,7 @@ public class GameLevelGlow extends Effects
         {
             GreenfootImage levelglow = new GreenfootImage("levelcounter glow.png");
             levelglow.scale(165, 52);
-            levelglow.setTransparency(99);
+            levelglow.setTransparency(150);
             setImage(levelglow);
             setLocation(580, 56);
             

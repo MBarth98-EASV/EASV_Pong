@@ -29,7 +29,7 @@ public class MultiScoreCounter extends Actor
     {
         if(!gotGlow)
         {
-            getWorld().addObject(new ScoreCounterGlow(), getX(), getY());
+            getWorld().addObject(new TwoPlayerScoreCounterGlow(), getX(), getY());
             gotGlow=true;
         }
     }
@@ -52,6 +52,6 @@ public class MultiScoreCounter extends Actor
         
     public void resetScore()
     {
-        ScoreKeeper.playerScore = 0;
+        ScoreKeeper.multiPlayerScore = 10;
     }
 }

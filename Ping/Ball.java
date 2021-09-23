@@ -1,8 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
+
 public class Ball extends Mover
 {
+    
+    
     private static final int BALL_SIZE = 25;
     
     private boolean isTouchingEdge = false; //Check if touching the walls again.
@@ -69,10 +72,14 @@ public class Ball extends Mover
         
         for (CollidableActor collider : colliders)
         {
-            collider.checkCollision(this);
+            CollidableActor.Vertex data = collider.checkCollision(this);
+            
+  
             
             if (collider.isTouchingBall == true && hasBounced == false)
             {
+                System.out.println("x: " + data.x);
+                System.out.println("y: " + data.y);
                 hasBounced = true;
                 motion.deflectX();
                 Sound.playRandomPingPong();

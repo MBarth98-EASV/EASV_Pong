@@ -10,8 +10,8 @@ public class Box
         public Verticies corners;
         public Sides sides;
         
-        private int height  = 0;
-        private int width   = 0;
+        public int height  = 0;
+        public int width   = 0;
         
         public Box(int x, int y, int width, int height)
         {
@@ -62,7 +62,7 @@ public class Box
                 this.bottomRight.set(sides.right, sides.bottom);
             }
         }
-    
+        
         public class Vertex
         {
             public int x;
@@ -81,4 +81,5 @@ public class Box
                 this.y = y;
             }
         }
+    
     }

@@ -1,5 +1,5 @@
 /**
- * 2D vector.
+ * A 2D vector.
  * 
  */
 public class Vector
@@ -15,7 +15,7 @@ public class Vector
     
     public Vector() {}
 
-    public Vector(double direction, double length) //Creates a vector
+    public Vector(double direction, double length)
     {
        this.length = length;
        
@@ -90,7 +90,7 @@ public class Vector
     public double getDirection() 
     {
         return direction;
-        }
+    }
     
     /**
      * Return the current length of the vector.
@@ -98,7 +98,7 @@ public class Vector
     public double getLength() 
     {
         return length;
-        }
+    }
     
     /**
      * Create a copy of this vector.
@@ -131,8 +131,18 @@ public class Vector
     }
     
     public int setBallY(int newY)
-        {
-            y = newY;
-            return y;
-        }
+    {
+        y = newY;
+        return y;
+    }
+    
+    public int getBallX()
+    {
+        return x;
+    }
+    
+    public int getBallY()
+    {
+        return y;
+    }
 }

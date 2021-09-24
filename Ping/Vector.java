@@ -40,7 +40,6 @@ public class Vector
         this.direction = direction;
         this.deltaX = this.length * Math.cos(Math.toRadians((int) direction));
         this.deltaY = this.length * Math.sin(Math.toRadians((int) direction));  
-        System.out.println("direction: " + (int) direction);
     }
    
     /**

@@ -15,7 +15,8 @@ public class MultiGameOverWorld extends GameWorld
     GreenfootImage multibg = new GreenfootImage("gameovermulti.png");
     private boolean textDrawn;
     public static boolean multiPlayerFinish = true;
-    
+    GreenfootImage backgroundWinner = new GreenfootImage("gameovermulti.png");
+    GreenfootImage composite = multibg;
     
     @Override
     public void ResetBackground() {}
@@ -77,7 +78,9 @@ public class MultiGameOverWorld extends GameWorld
             FlashingTextGlow currentglow = glow.get(0);
             
             removeObject(currentglow);
-            setBackground(multibg);
+            
+            setBackground(composite);
+            
             textDrawn = false;
             lastAdded = curTime;
         }
@@ -116,32 +119,36 @@ public class MultiGameOverWorld extends GameWorld
         }
     }
     
-    private void drawWinner()
+    public void drawWinner()
     {
-        setBackground(multibg);
-        GreenfootImage backgroundWinner = new GreenfootImage(getBackground());
-        if (ScoreKeeper.playerScore > ScoreKeeper.multiPlayerScore)
+        
+        
+        GreenfootImage composite = multibg;
+        if (ScoreKeeper.playerScore >= ScoreKeeper.multiPlayerScore)
         
         {
          String winner = "1";
-         Font font  = new Font("Consolas", 20);
+         Font font  = new Font("Consolas", 34);
             
+         composite.drawImage(backgroundWinner, 0, 0);
+         composite.setColor(Color.WHITE);
+         composite.setFont(font);
+         composite.drawString(winner, 360, 286);
+         composite.setColor(Color.BLACK);
          
-         backgroundWinner.setColor(Color.WHITE);
-         backgroundWinner.setFont(font);
-         backgroundWinner.drawString(winner, 100, 100);
-         setBackground(backgroundWinner);
+         setBackground(composite);
         }
         else if (ScoreKeeper.playerScore < ScoreKeeper.multiPlayerScore)
         {
          String winner = "2";
-         Font font  = new Font("Consolas", 20);
+         Font font  = new Font("Consolas", 34);
             
          
          backgroundWinner.setColor(Color.WHITE);
          backgroundWinner.setFont(font);
-         backgroundWinner.drawString(winner, 100, 100);
-         setBackground(backgroundWinner);
+         backgroundWinner.drawString(winner, 360, 286);
+         multibg.drawImage(backgroundWinner, 0, 0);
+         setBackground(composite);
         }
     }
     

@@ -38,8 +38,9 @@ public class Vector
     public void setDirection(double direction) 
     {
         this.direction = direction;
-        this.deltaX = this.length * Math.cos(Math.toRadians(direction));
-        this.deltaY = this.length * Math.sin(Math.toRadians(direction));   
+        this.deltaX = this.length * Math.cos(Math.toRadians((int) direction));
+        this.deltaY = this.length * Math.sin(Math.toRadians((int) direction));  
+        System.out.println("direction: " + (int) direction);
     }
    
     /**
@@ -65,6 +66,17 @@ public class Vector
     public void setDeltaX(double dx) 
     {
         deltaX = dx;
+    }
+    
+    public void multiplier(double value)
+    {
+        deltaX *= value;
+        deltaY *= value;
+        
+        double deltaXSquared = (deltaX * deltaX);
+        double deltaYSquared = (deltaY * deltaY);
+        
+        this.length = Math.sqrt(deltaXSquared + deltaYSquared);
     }
     
     /**
@@ -115,12 +127,18 @@ public class Vector
         return new Vector(this.direction, this.length);
     }
     
+    public void setLenght(double length)
+    {
+        this.length = length;
+    }
     /**
      *  Inverse of delta x
      */
     public void deflectX()
     {
+        System.out.println("dt : " + this.deltaX);
         this.deltaX *= -1;
+        System.out.println("dt2 : " + this.deltaX);
     }
     
     /**

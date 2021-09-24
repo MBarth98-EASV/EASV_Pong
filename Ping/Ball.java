@@ -127,10 +127,6 @@ public class Ball extends Mover
         if( getX() <= dieConditionOne || getX() >= dieConditionTwo)
         {
             Sound.playBallBoom();
-            getWorld().removeObject(glowEffect);
-            getWorld().removeObject(this);
-            Greenfoot.delay(150);
-            Greenfoot.setWorld( new GameOverWorld());
             
         }
     }

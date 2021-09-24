@@ -18,27 +18,48 @@ public class MultiplayerWorld extends GameWorld
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
         setPaintOrder(Overlay.class, Paddle.class, Ball.class, ScoreCounter.class, ScoreCounterGlow.class, PaddleGlow.class);
         
-        /*
-        //add ball with glow effect
         Ball ball = new Ball();
         addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
         ball.addGlow();
-        */
-
-        //initializeScoreCounters();
+            
+        initializePlayers();
+        
 
         
-        addObject(new ScoreCounter(), WORLD_WIDTH / 4, 80);
-        addObject(new MultiScoreCounter(), (WORLD_WIDTH / 4) * 3, 80);
+        
+    }
+    
+    private void initializePlayers()
+    {
+        Paddle playerOne     = new PlayerPaddle(Paddle.SCREEN_POSITION.LEFT, "w", "s");
+        Paddle playerTwo     = new PlayerPaddle(Paddle.SCREEN_POSITION.RIGHT, "Up","Down");
+            
+        addObject(playerOne, (int)playerOne.xPos, (int)playerOne.yPos);
+        addObject(playerTwo, (int)playerTwo.xPos, (int)playerTwo.yPos);
+            
+        playerOne.addGlow();
+        playerTwo.addGlow();
+        
     }
     
     public void act()
     {
-        
+        winCondition();
     }
     
-    public void initializeScoreCounters()
+    public void winCondition()
     {
+    if (getObjects(Ball.class).get(0).getX() <=5)
+        {
+        ScoreKeeper.playerOneWins = false;
+        Greenfoot.setWorld(new MultiGameOverWorld());
+        }
+    if (getObjects(Ball.class).get(0).getX() >= getWidth()-5)
+        {
+        ScoreKeeper.playerOneWins = true;
+        Greenfoot.setWorld(new MultiGameOverWorld());
+        }
         
+    
     }
 }

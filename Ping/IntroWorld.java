@@ -29,6 +29,8 @@ public class IntroWorld extends GameWorld
     {
         super(); 
         
+        multiPlayer = false;
+        
         setBackground(background);
         
         

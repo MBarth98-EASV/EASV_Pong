@@ -1,5 +1,5 @@
 import greenfoot.*;
-
+import java.util.List;
 
 /**
  * The Ping World is where Balls and Paddles meet to play pong.
@@ -52,6 +52,11 @@ public class PingWorld extends GameWorld
         }
     }
     
+    public void act()
+    {
+        deathCondition();
+    }
+    
     private void initializePlayers()
     {
         Paddle playerHuman  = new PlayerPaddle();
@@ -62,5 +67,17 @@ public class PingWorld extends GameWorld
             
         playerHuman.addGlow();
         playerAI.addGlow();
+    }
+    
+    
+    private void deathCondition()
+    {
+        if (getObjects(Ball.class).get(0).getX() <=5)
+        {
+        ScoreKeeper.playerOneWins = false;
+        Greenfoot.setWorld(new GameOverWorld());
+        }
+        
+        
     }
 }

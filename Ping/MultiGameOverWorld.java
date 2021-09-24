@@ -98,8 +98,7 @@ public class MultiGameOverWorld extends GameWorld
         GreenfootImage composite = multibg;
         
         
-        if (ScoreKeeper.playerScore >= ScoreKeeper.multiPlayerScore)
-
+        if (ScoreKeeper.playerOneWins == true)
         {
          String winner = "1";
          Font font  = new Font("Consolas", 34);
@@ -112,7 +111,8 @@ public class MultiGameOverWorld extends GameWorld
          composite.setColor(Color.BLACK);
          setBackground(composite);
         }
-        else if (ScoreKeeper.playerScore < ScoreKeeper.multiPlayerScore)
+        
+        else if (ScoreKeeper.playerOneWins == false)
         {
          String winner = "2";
          Font font  = new Font("Consolas", 34);

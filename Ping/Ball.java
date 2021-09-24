@@ -156,7 +156,14 @@ public class Ball extends Mover
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
             Greenfoot.delay(150);
-            Greenfoot.setWorld( new GameOverWorld());
+            if (MultiplayerWorld.multiPlayerActive == true)
+            {
+                   Greenfoot.setWorld( new MultiGameOverWorld());
+            }else
+            {
+                Greenfoot.setWorld( new GameOverWorld());
+            }
+            
         }
     }
 }

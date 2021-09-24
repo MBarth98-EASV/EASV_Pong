@@ -177,8 +177,9 @@ public class Ball extends Mover
                 Greenfoot.setWorld(new MultiplayerWorld());
             }
             
-            else
-            if (MultiplayerWorld.multiPlayerActive == false)
+           
+            
+            else 
             {
                 Greenfoot.setWorld( new GameOverWorld());
             }
@@ -199,23 +200,8 @@ public class Ball extends Mover
                 ScoreKeeper.playerScore++;
             }
         }
-        decideWinner();
+        
     }
     
-    private void decideWinner()
-    {
-        int limit = 6;
-        if (ScoreKeeper.playerScore == limit || ScoreKeeper.multiPlayerScore==limit)
-        {
-            if (ScoreKeeper.playerScore == limit)
-            {
-                ScoreKeeper.winner = "Player 1";
-            }
-            else
-            {
-                ScoreKeeper.winner = "Player 2";
-            }
-            Greenfoot.setWorld( new MultiGameOverWorld());
-        }
-    }
+  
 }

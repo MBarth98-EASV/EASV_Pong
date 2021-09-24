@@ -27,7 +27,7 @@ public class MultiGameOverWorld extends GameWorld
         setPaintOrder(Overlay.class, EndingScore.class);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2); //Adds and overlay than covers every object on screen.
         drawWinner();
-        endScore();
+        
         
         
     }
@@ -35,7 +35,7 @@ public class MultiGameOverWorld extends GameWorld
     public void act()
     {
         flashingContinueText();
-        
+        resetScores();
         
         goToIntro();
     }

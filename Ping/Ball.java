@@ -26,7 +26,7 @@ public class Ball extends Mover
     
     public Ball()
     {
-        increaseSpeed(new Vector(5, 2)); //IInit speed of vector
+        increaseSpeed(new Vector(5, 4)); //IInit speed of vector
         createImage();
         hasBounced = false;
     }
@@ -55,8 +55,8 @@ public class Ball extends Mover
             if(getY() < 20 || getY() > getWorld().getHeight() - 20)
             {
                 motion.deflectY();
-        
             }
+            
             Sound.playRandomHit();
         }
     }
@@ -73,23 +73,26 @@ public class Ball extends Mover
         
         for (CollidableActor collider : colliders)
         {
-            CollidableActor.Vertex data = collider.checkCollision();
-            
+            collider.checkCollision(this);
 
             if (collider.isTouchingBall == true && hasBounced == false)
             {
-                System.out.println("x: " + data.x);
-                System.out.println("y: " + data.y);
                 hasBounced = true;
                 motion.deflectX();
-                motion.setDirection(motion.getDirection() + (180 + (Greenfoot.getRandomNumber(60)-30)));
+                if (GameWorld.WORLD_WIDTH/2 > getY())
+                {
+                    motion.setDirection(motion.getDirection() + (180 + (Greenfoot.getRandomNumber(15))));
+                }
+                else
+                {
+                    motion.setDirection(motion.getDirection() + (180 - (Greenfoot.getRandomNumber(15))));
+                }
                 Sound.playRandomPingPong();
                 if (collider.getClass() == PlayerPaddle.class)
                 {
                     ScoreKeeper.playerScore++;
                     adjustSpeed();
                 }
-                
             }
             else
             {
@@ -113,7 +116,7 @@ public class Ball extends Mover
     {
         if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
             increaseSpeed(new Vector(0,addedSpeed));  
-            GameLevel.gameLevel ++;
+            GameLevelCounter.gameLevel++;
         }
     }
     

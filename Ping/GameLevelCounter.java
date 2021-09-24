@@ -12,6 +12,7 @@ public class GameLevelCounter extends Actor
     int imageWidth;
     int imageHeight;
     Font font  = new Font("Consolas", 25);
+    public static int gameLevel = 0;
     
     public GameLevelCounter()
     {
@@ -32,7 +33,7 @@ public class GameLevelCounter extends Actor
     
     private void drawGameLevel()
     {
-        String scoreString = String.valueOf("level"+":" +GameLevel.gameLevel);
+        String scoreString = String.valueOf("level"+":" + gameLevel);
         image.clear();
         image.setColor(Color.WHITE);
         image.setFont(font);
@@ -42,6 +43,6 @@ public class GameLevelCounter extends Actor
     
     private void resetScore()
     {
-        GameLevel.gameLevel = 0;
+        gameLevel = 0;
     }
 }

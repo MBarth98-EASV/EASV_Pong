@@ -107,14 +107,14 @@ public class Ball extends Mover
                        motion.setDirection(motion.getDirection() + 180);
                     }
                     
-
                     Sound.playRandomPingPong();
                 
-                    if (paddle.getClass() == PlayerPaddle.class)
+                    if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == false)
                     {
                         ScoreKeeper.playerScore++;
                         adjustSpeed();
                     }
+                    
                 }
                 
                 hasBounced = true;
@@ -152,18 +152,54 @@ public class Ball extends Mover
     {
         if( getX() <= dieConditionOne || getX() >= dieConditionTwo)
         {
+            giveMultiplayerPoints();
             Sound.playBallBoom();
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
             Greenfoot.delay(150);
             if (MultiplayerWorld.multiPlayerActive == true)
             {
-                   Greenfoot.setWorld( new MultiGameOverWorld());
+                ScoreKeeper.storePlayerScore = ScoreKeeper.playerScore;
+                ScoreKeeper.storeMultiPlayerScore = ScoreKeeper.multiPlayerScore;
+                Greenfoot.setWorld(new MultiplayerWorld());
             }else
             {
                 Greenfoot.setWorld( new GameOverWorld());
             }
             
+        }
+    }
+    
+    private void giveMultiplayerPoints()
+    {
+        if (MultiplayerWorld.multiPlayerActive == true)
+        {
+                if (getX() <= dieConditionOne)
+            {   
+                ScoreKeeper.multiPlayerScore++;
+            }
+            if (getX() >= dieConditionTwo)
+            {
+                ScoreKeeper.playerScore++;
+            }
+        }
+        
+    }
+    
+    private void decideWinner()
+    {
+        int limit = 5;
+        if (ScoreKeeper.playerScore == limit || ScoreKeeper.multiPlayerScore==limit)
+        {
+            if (ScoreKeeper.playerScore == limit)
+            {
+                ScoreKeeper.winner = "Player 1";
+            }
+            else
+            {
+                ScoreKeeper.winner = "Player 2";
+            }
+            Greenfoot.setWorld( new MultiGameOverWorld());
         }
     }
 }

@@ -56,6 +56,9 @@ public class ScoreCounter extends Actor
         
     public void resetScore()
     {
-        ScoreKeeper.playerScore = 0;
+        if (ScoreKeeper.playerScore>=6 || MultiplayerWorld.multiPlayerActive == false)
+        {
+            ScoreKeeper.playerScore = 0;    
+        }
     }
 }

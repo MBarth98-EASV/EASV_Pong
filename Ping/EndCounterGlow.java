@@ -27,7 +27,7 @@ public class EndCounterGlow extends Effects
     
     public void scaleImage()
     {   // Sets the glow effect to be scaled and repositioned depending on how many digits the current score has.
-        if (ScoreKeeper.playerScore <= 9)
+        if (ScoreKeeper.playerScore <= 9 || ScoreKeeper.multiPlayerScore <= 9)
         {
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
@@ -36,7 +36,8 @@ public class EndCounterGlow extends Effects
             
             
         }
-        else if (ScoreKeeper.playerScore >= 9 && ScoreKeeper.playerScore < 100)
+        else if (ScoreKeeper.playerScore >= 10 && ScoreKeeper.playerScore < 100 
+                || ScoreKeeper.multiPlayerScore >= 10 && ScoreKeeper.multiPlayerScore < 100)
         {
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);
@@ -45,7 +46,7 @@ public class EndCounterGlow extends Effects
             
             
         }
-        else if (ScoreKeeper.playerScore >= 99)
+        else if (ScoreKeeper.playerScore > 99 || ScoreKeeper.multiPlayerScore > 99)
         {
             GreenfootImage counterGlow = new GreenfootImage("scorecounter glow.png");
             setImage(counterGlow);

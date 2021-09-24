@@ -30,12 +30,14 @@ public class Ball extends Mover
     
     protected Effects glowEffect = new BallGlow();
     
+    private int hits;
+    
     public Ball()
     {
         increaseSpeed(new Vector(5, 4)); //IInit speed of vector
         createImage();
         hasBounced = false;
-
+        hits = 0;
         randomNumberGenerator = new Random(java.time.Instant.now().toEpochMilli());
     }
     
@@ -107,14 +109,20 @@ public class Ball extends Mover
                        motion.setDirection(motion.getDirection() + 180);
                     }
                     
-
                     Sound.playRandomPingPong();
                 
-                    if (paddle.getClass() == PlayerPaddle.class)
+                    if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == false)
                     {
                         ScoreKeeper.playerScore++;
+                        hits++;
                         adjustSpeed();
                     }
+                    if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == true)
+                    {
+                        hits++;
+                        adjustSpeed();
+                    }
+                    
                 }
                 
                 hasBounced = true;
@@ -136,10 +144,12 @@ public class Ball extends Mover
     
     private void adjustSpeed()
     {
-        if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
+        if (hits % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0 && MultiplayerWorld.multiPlayerActive == false){
             increaseSpeed(new Vector(0, addedSpeed));  
-            
             GameLevel.gameLevel ++;
+        }
+        if (hits % scoreToSpeedUp == 0 && hits != 0 && MultiplayerWorld.multiPlayerActive == true){
+            increaseSpeed(new Vector(0, addedSpeed));  
         }
     }
     
@@ -152,18 +162,60 @@ public class Ball extends Mover
     {
         if( getX() <= dieConditionOne || getX() >= dieConditionTwo)
         {
+            giveMultiplayerPoints();
             Sound.playBallBoom();
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
             Greenfoot.delay(150);
+            
+            
+            
+            
             if (MultiplayerWorld.multiPlayerActive == true)
             {
-                   Greenfoot.setWorld( new MultiGameOverWorld());
-            }else
+                
+                Greenfoot.setWorld(new MultiplayerWorld());
+            }
+            
+            else
+            if (MultiplayerWorld.multiPlayerActive == false)
             {
                 Greenfoot.setWorld( new GameOverWorld());
             }
             
+        }
+    }
+    
+    private void giveMultiplayerPoints()
+    {
+        if (MultiplayerWorld.multiPlayerActive == true)
+        {
+                if (getX() <= dieConditionOne)
+            {   
+                ScoreKeeper.multiPlayerScore++;
+            }
+            if (getX() >= dieConditionTwo)
+            {
+                ScoreKeeper.playerScore++;
+            }
+        }
+        decideWinner();
+    }
+    
+    private void decideWinner()
+    {
+        int limit = 6;
+        if (ScoreKeeper.playerScore == limit || ScoreKeeper.multiPlayerScore==limit)
+        {
+            if (ScoreKeeper.playerScore == limit)
+            {
+                ScoreKeeper.winner = "Player 1";
+            }
+            else
+            {
+                ScoreKeeper.winner = "Player 2";
+            }
+            Greenfoot.setWorld( new MultiGameOverWorld());
         }
     }
 }

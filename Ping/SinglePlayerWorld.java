@@ -42,6 +42,7 @@ public class SinglePlayerWorld extends GameWorld
         {
             Greenfoot.setWorld(new IntroWorld());
         }
+        resetscore();
     }
      
     @Override
@@ -60,5 +61,9 @@ public class SinglePlayerWorld extends GameWorld
             
         playerHuman.addGlow();
         playerAI.addGlow();
+    }
+    private void resetscore()
+    {
+        ScoreKeeper.playerScore = 0;
     }
 }

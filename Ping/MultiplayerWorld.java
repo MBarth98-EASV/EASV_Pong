@@ -49,8 +49,8 @@ public class MultiplayerWorld extends GameWorld
     
     private void initializePlayers()
     {
-        Paddle playerOne     = new PlayerPaddle();
-        Paddle playerTwo     = new Player2Paddle();
+        Paddle playerOne     = new PlayerPaddle(Paddle.SCREEN_POSITION.LEFT, "w", "s");
+        Paddle playerTwo     = new PlayerPaddle(Paddle.SCREEN_POSITION.RIGHT, "Up","Down");
             
         addObject(playerOne, (int)playerOne.xPos, (int)playerOne.yPos);
         addObject(playerTwo, (int)playerTwo.xPos, (int)playerTwo.yPos);

@@ -12,6 +12,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class PlayerPaddle extends Paddle
 {   
+    private String KeyUp;
+    private String KeyDown;
+    
+    public PlayerPaddle(SCREEN_POSITION position, String KeyUp, String KeyDown)
+    {
+        super(position, false, WIDTH, HEIGHT);
+        this.KeyUp = KeyUp;
+        this.KeyDown = KeyDown;
+    }
+    
     public PlayerPaddle(SCREEN_POSITION position, boolean useMouse)
     {
         super(position, useMouse, WIDTH, HEIGHT);
@@ -66,11 +76,11 @@ public class PlayerPaddle extends Paddle
     @Override
     public final void moveKeys()
     {
-        if (Greenfoot.isKeyDown("up"))
+        if (Greenfoot.isKeyDown(KeyUp))
         {
             moveUp();
         }
-        else if (Greenfoot.isKeyDown("down"))
+        else if (Greenfoot.isKeyDown(KeyDown))
         {
             moveDown();
         }

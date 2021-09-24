@@ -12,6 +12,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AIPaddle extends Paddle
 {   
+    
     public AIPaddle(SCREEN_POSITION position)
     {
         super(position, false, WIDTH, HEIGHT);
@@ -39,11 +40,11 @@ public class AIPaddle extends Paddle
 
             if (distanceToBall < GameWorld.WORLD_HEIGHT / 4 * 3)
             {
-                movePaddleToCoord(ball.getX(), ball.getY());
+               movePaddleToCoord(ball.getX(), ball.getY());
             }
             else
             {
-                movePaddleToCenter();
+               movePaddleToCenter();
             }  
         }
     }

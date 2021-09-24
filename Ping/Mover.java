@@ -2,8 +2,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
 
 /**
  * A thing that can move around with a certain speed.
- * 
- * @author Poul Henriksen
  */
 public abstract class Mover extends Actor
 {

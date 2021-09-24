@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.List;
 /**
  * Write a description of class AIPaddle here.
  * 
@@ -12,10 +12,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AIPaddle extends Paddle
 {   
-    
+    private int SEARCH_RADIUS = GameWorld.WORLD_WIDTH / 4 * 3;
+    private boolean isHit = true;
+    private int SPEED = 8;
+
     public AIPaddle(SCREEN_POSITION position)
     {
-        super(position, false, WIDTH, HEIGHT);
+        super(position, true, WIDTH, HEIGHT);
     }
     
     public AIPaddle()
@@ -26,21 +29,23 @@ public class AIPaddle extends Paddle
     @Override
     public final void moveToMouse()
     {
-        return;
-    }
-    
-    @Override
-    public final void moveKeys()
-    {
-        java.util.List<Ball> balls = getWorld().getObjects(Ball.class);
+        List<Ball> Balls = getObjectsInRange(SEARCH_RADIUS, Ball.class);
         
-        for (Actor ball : balls)
-        {   
+        for(Ball ball : Balls)
+        {
             int distanceToBall = Math.abs(this.getX() - ball.getX());
-
-            if (distanceToBall < GameWorld.WORLD_HEIGHT / 4 * 3)
+            if ( ball.hasBounced == true)
+                {
+                    isHit = true;
+                }
+            else if ( distanceToBall > (GameWorld.WORLD_HEIGHT / 4 * 3))
+                {
+                    isHit = false;
+                }
+            
+            if ( isHit == false)
             {
-               movePaddleToCoord(ball.getX(), ball.getY());
+                searchTarget(ball.getX(), ball.getY());
             }
             else
             {
@@ -49,28 +54,50 @@ public class AIPaddle extends Paddle
         }
     }
     
-    private void movePaddleToCoord(double x, double y)
+    private void searchTarget(double X, double Y)
     {
-        if (y < this.getY())
+    super.xTarget = X;
+    super.yTarget = Y;  
+        if (!this.isAxisDisabledX) // handle x component for movement
+    
         {
-           super.moveUp();
+            if (this.xPos > super.xTarget) // mouse is to the right of current position
+            {
+                this.xPos -= ((this.xPos - super.xTarget) + this.speed) * this.deltaTime; 
+            }
+            else // mouse is to the right of current position
+            {
+            this.xPos += ((super.xTarget - this.xPos) + this.speed) * this.deltaTime; 
+            }
         }
-        else
-        {
-            super.moveDown();
+            
+        if (!this.isAxisDisabledY) // handle y component for movement
+            {
+            if (this.yPos < super.yTarget) // mouse is below the current position
+            {
+                this.yPos -= ((this.yPos - super.yTarget) + this.speed) * this.deltaTime; 
+            }
+            else // mouse is above the current position
+            {
+            this.yPos += ((super.yTarget - this.yPos) + this.speed) * this.deltaTime; 
+            }
         }
+    }
+    @Override
+    public final void moveKeys()
+    {
     }
     
     private void movePaddleToCenter()
     {
-        if (getY() < GameWorld.WORLD_HEIGHT / 2)
-        {
-            super.moveDown();
-        }
-        else if (getY() > GameWorld.WORLD_HEIGHT / 2)
-        {
-            super.moveUp();
-        }
+            if (getY() < GameWorld.WORLD_HEIGHT / 2)
+            {
+                super.moveDown();
+            }
+            else if (getY() > GameWorld.WORLD_HEIGHT / 2)
+            {
+                super.moveUp();
+            }
         // else in center (do nothing)!!!
     }
     

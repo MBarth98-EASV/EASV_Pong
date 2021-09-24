@@ -32,7 +32,7 @@ public class Ball extends Mover
     
     public Ball()
     {
-        increaseSpeed(new Vector(5, 2)); //IInit speed of vector
+        increaseSpeed(new Vector(5, 4)); //IInit speed of vector
         createImage();
         hasBounced = false;
 

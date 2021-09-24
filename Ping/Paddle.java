@@ -19,7 +19,7 @@ public abstract class Paddle extends Actor
     public static final int HEIGHT = 100;
     public static final int BASE_OFFSET_X = 25;
     public static final int BASE_OFFSET_Y = SinglePlayerWorld.WORLD_HEIGHT / 2;
-    public static final double BASE_SPEED = 2.0;
+    public static final double BASE_SPEED = 4.0;
    
     protected final boolean isAxisDisabledX = true;
     protected final boolean isAxisDisabledY = false;

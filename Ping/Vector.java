@@ -135,9 +135,7 @@ public class Vector
      */
     public void deflectX()
     {
-        System.out.println("dt : " + this.deltaX);
         this.deltaX *= -1;
-        System.out.println("dt2 : " + this.deltaX);
     }
     
     /**

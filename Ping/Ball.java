@@ -117,7 +117,7 @@ public class Ball extends Mover
                         hits++;
                         adjustSpeed();
                     }
-                    if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == false)
+                    if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == true)
                     {
                         hits++;
                         adjustSpeed();
@@ -167,11 +167,18 @@ public class Ball extends Mover
             getWorld().removeObject(glowEffect);
             getWorld().removeObject(this);
             Greenfoot.delay(150);
+            
+            
+            
+            
             if (MultiplayerWorld.multiPlayerActive == true)
             {
                 
                 Greenfoot.setWorld(new MultiplayerWorld());
-            }else
+            }
+            
+            else
+            if (MultiplayerWorld.multiPlayerActive == false)
             {
                 Greenfoot.setWorld( new GameOverWorld());
             }
@@ -192,7 +199,7 @@ public class Ball extends Mover
                 ScoreKeeper.playerScore++;
             }
         }
-        
+        decideWinner();
     }
     
     private void decideWinner()

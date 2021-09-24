@@ -21,6 +21,7 @@ public class MultiGameOverWorld extends GameWorld
     public void ResetBackground() {}
     public MultiGameOverWorld()
     {
+        
         super();
         setPaintOrder(Overlay.class, EndingScore.class);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2); //Adds and overlay than covers every object on screen.
@@ -33,6 +34,7 @@ public class MultiGameOverWorld extends GameWorld
     public void act()
     {
         flashingContinueText();
+        
         
         goToIntro();
     }
@@ -85,7 +87,7 @@ public class MultiGameOverWorld extends GameWorld
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter"))
         {
-            
+            resetScores();
             Greenfoot.setWorld(new IntroWorld());
         }
     }
@@ -141,5 +143,11 @@ public class MultiGameOverWorld extends GameWorld
          backgroundWinner.drawString(winner, 100, 100);
          setBackground(backgroundWinner);
         }
+    }
+    
+    private void resetScores()
+    {
+        ScoreKeeper.playerScore = 0;
+        ScoreKeeper.multiPlayerScore = 0;
     }
 }

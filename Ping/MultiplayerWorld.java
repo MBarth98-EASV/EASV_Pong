@@ -12,13 +12,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MultiplayerWorld extends GameWorld
 {   
-    public boolean multiPlayerActive = true;
+    public static boolean multiPlayerActive = false;
     
     @Override
     public void ResetBackground() {}
     public MultiplayerWorld()
     {
         super();
+        multiPlayerActive = true;
         GreenfootImage background = new GreenfootImage("bg90.png");
         setBackground(background);
         addObject(new Overlay(), WORLD_WIDTH/2, WORLD_HEIGHT/2);

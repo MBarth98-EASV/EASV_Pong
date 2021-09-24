@@ -62,11 +62,19 @@ public class MultiplayerWorld extends GameWorld
     
     public void act()
     {
-        
+        winCondition();
     }
     
     public void initializeScoreCounters()
     {
         
+    }
+    
+    public void winCondition()
+    {
+        if (ScoreKeeper.playerScore > 5 || ScoreKeeper.multiPlayerScore > 5)
+        {
+            Greenfoot.setWorld(new MultiGameOverWorld());
+        }
     }
 }

@@ -14,6 +14,5 @@ public class ScoreKeeper
     public static int multiPlayerScore=0;
     public static String winner;
     
-    public static int storePlayerScore;
-    public static int storeMultiPlayerScore;
+    
 }

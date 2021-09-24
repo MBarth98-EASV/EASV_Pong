@@ -30,12 +30,14 @@ public class Ball extends Mover
     
     protected Effects glowEffect = new BallGlow();
     
+    private int hits;
+    
     public Ball()
     {
-        increaseSpeed(new Vector(5, 2)); //IInit speed of vector
+        increaseSpeed(new Vector(5, 4)); //IInit speed of vector
         createImage();
         hasBounced = false;
-
+        hits = 0;
         randomNumberGenerator = new Random(java.time.Instant.now().toEpochMilli());
     }
     
@@ -112,6 +114,12 @@ public class Ball extends Mover
                     if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == false)
                     {
                         ScoreKeeper.playerScore++;
+                        hits++;
+                        adjustSpeed();
+                    }
+                    if (paddle.getClass() == PlayerPaddle.class && MultiplayerWorld.multiPlayerActive == false)
+                    {
+                        hits++;
                         adjustSpeed();
                     }
                     
@@ -136,10 +144,12 @@ public class Ball extends Mover
     
     private void adjustSpeed()
     {
-        if (ScoreKeeper.playerScore % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0){
+        if (hits % scoreToSpeedUp == 0 && ScoreKeeper.playerScore != 0 && MultiplayerWorld.multiPlayerActive == false){
             increaseSpeed(new Vector(0, addedSpeed));  
-            
             GameLevel.gameLevel ++;
+        }
+        if (hits % scoreToSpeedUp == 0 && hits != 0 && MultiplayerWorld.multiPlayerActive == true){
+            increaseSpeed(new Vector(0, addedSpeed));  
         }
     }
     
@@ -159,8 +169,7 @@ public class Ball extends Mover
             Greenfoot.delay(150);
             if (MultiplayerWorld.multiPlayerActive == true)
             {
-                ScoreKeeper.storePlayerScore = ScoreKeeper.playerScore;
-                ScoreKeeper.storeMultiPlayerScore = ScoreKeeper.multiPlayerScore;
+                
                 Greenfoot.setWorld(new MultiplayerWorld());
             }else
             {
@@ -188,7 +197,7 @@ public class Ball extends Mover
     
     private void decideWinner()
     {
-        int limit = 5;
+        int limit = 6;
         if (ScoreKeeper.playerScore == limit || ScoreKeeper.multiPlayerScore==limit)
         {
             if (ScoreKeeper.playerScore == limit)

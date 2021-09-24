@@ -19,6 +19,7 @@ public class EndingScore extends Actor
     
     public void act()
     {
+        
     }
     
     public void drawFinalScore()
@@ -26,14 +27,45 @@ public class EndingScore extends Actor
         int imageWidth = 360;
         int imageHeight = 100;
         GreenfootImage image = new GreenfootImage(imageWidth , imageHeight);
-        String scoreString = String.valueOf(ScoreKeeper.playerScore);
-        Font font  = new Font("Consolas", 20);
+        
+        if (GameOverWorld.multiPlayerFinish == false)
+        {
+            String scoreString = String.valueOf(ScoreKeeper.playerScore);
+            Font font  = new Font("Consolas", 20);
        
-        image.clear();
-        image.setColor(Color.WHITE);
-        image.setFont(font);
-        image.drawString(scoreString,imageWidth/2-4, image.getHeight()/2);
-        setImage(image);
+            image.clear();
+            image.setColor(Color.WHITE);
+            image.setFont(font);
+            image.drawString(scoreString, imageWidth/2-4, image.getHeight()/2);
+            setImage(image);
+        }
+        
+        else if  (MultiGameOverWorld.multiPlayerFinish == true && ScoreKeeper.playerScore > ScoreKeeper.multiPlayerScore)
+        {
+            
+            String scoreString = String.valueOf(ScoreKeeper.playerScore);
+            Font font  = new Font("Consolas", 20);
+       
+            image.clear();
+            image.setColor(Color.WHITE);
+            image.setFont(font);
+            image.drawString(scoreString, imageWidth/2-4, image.getHeight()/2);
+            setImage(image);
+        }
+       
+        else if (MultiGameOverWorld.multiPlayerFinish == true && ScoreKeeper.playerScore < ScoreKeeper.multiPlayerScore)
+        {
+            
+            String scoreString = String.valueOf(ScoreKeeper.multiPlayerScore);
+            Font font  = new Font("Consolas", 20);
+            
+            image.clear();
+            image.setColor(Color.WHITE);
+            image.setFont(font);
+            image.drawString(scoreString, imageWidth/2-4, image.getHeight()/2);
+            setImage(image);
+        }
+        
     }
     
     

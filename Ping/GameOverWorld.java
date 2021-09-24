@@ -20,6 +20,8 @@ public class GameOverWorld extends GameWorld
     GreenfootSound gameOverSound = new GreenfootSound("gameover.wav");
     GreenfootImage gameoverBG = new GreenfootImage("gameoverbg.png");
     private boolean textDrawn;
+    public static boolean multiPlayerFinish = false;
+    
     public GameOverWorld()
     {
         super(); 
@@ -52,7 +54,8 @@ public class GameOverWorld extends GameWorld
             addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);
         }
         
-        else if (ScoreKeeper.playerScore >= 100 && ScoreKeeper.playerScore < 1000)
+        else if (ScoreKeeper.playerScore >= 100 && ScoreKeeper.playerScore < 1000 
+                 || ScoreKeeper.multiPlayerScore >= 100 && ScoreKeeper.multiPlayerScore <= 1000)
         {
             addObject(new EndingScore(), (getWidth()/2)-14, getHeight()/2+155);
             addObject(endGlow, (getWidth()/2)-1, getHeight()/2+148);

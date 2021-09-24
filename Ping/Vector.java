@@ -19,10 +19,7 @@ public class Vector
     {
        this.length = length;
        
-       setDirection(direction);
-       // this.direction = direction;
-       // dx = length * Math.cos(Math.toRadians(direction));
-       // dy = length * Math.sin(Math.toRadians(direction));    
+       setDirection(direction);  
     }
 
     /**

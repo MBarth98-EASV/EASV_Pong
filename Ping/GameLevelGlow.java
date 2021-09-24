@@ -25,7 +25,7 @@ public class GameLevelGlow extends Effects
     
     private void scaleScoreImage()
     {
-        if (GameLevel.gameLevel <= 9)
+        if (GameLevelCounter.gameLevel <= 9)
         {
             GreenfootImage levelglow = new GreenfootImage("levelcounter glow.png");
             levelglow.scale(145, 52);
@@ -34,7 +34,7 @@ public class GameLevelGlow extends Effects
             setLocation(573, 56);
             
         }
-        else if (GameLevel.gameLevel >= 10)
+        else if (GameLevelCounter.gameLevel >= 10)
         {
             GreenfootImage levelglow = new GreenfootImage("levelcounter glow.png");
             levelglow.scale(165, 52);

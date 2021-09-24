@@ -19,7 +19,7 @@ public abstract class Paddle extends CollidableActor
     public static final int WIDTH = 100;
     public static final int BASE_OFFSET_X = 25;
     public static final int BASE_OFFSET_Y = PingWorld.WORLD_HEIGHT / 2;
-    public static final double BASE_SPEED = 2.0;
+    public static final double BASE_SPEED = 4.0;
    
     protected final boolean isAxisDisabledX = true;
     protected final boolean isAxisDisabledY = false;
@@ -110,8 +110,6 @@ public abstract class Paddle extends CollidableActor
     public void act() 
     {
         move();
-        
-        checkCollision();
         
         computeDeltaTime();
     }    

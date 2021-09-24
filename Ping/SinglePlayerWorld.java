@@ -1,25 +1,17 @@
 import greenfoot.*;
 
-
 /**
  * The Ping World is where Balls and Paddles meet to play pong.
  * 
  * @author The teachers 
  * @version 1
  */
-public class PingWorld extends GameWorld
+public class SinglePlayerWorld extends GameWorld
 {
-    
-     
-    @Override
-    public void ResetBackground()
-    {
-       setBackground(new GreenfootImage("bg90.png"));
-    }
     /**
      * Constructor for objects of class PingWorld.
      */
-    public PingWorld(boolean gameStarted)
+    public SinglePlayerWorld(boolean gameStarted)
     {
         super(); 
         
@@ -50,6 +42,12 @@ public class PingWorld extends GameWorld
         {
             Greenfoot.setWorld(new IntroWorld());
         }
+    }
+     
+    @Override
+    public void ResetBackground()
+    {
+       setBackground(new GreenfootImage("bg90.png"));
     }
     
     private void initializePlayers()

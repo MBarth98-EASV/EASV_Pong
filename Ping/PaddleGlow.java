@@ -1,35 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.List;
 
 /**
  * Write a description of class PaddleGlow here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class PaddleGlow extends Effects
 {
-    
     public PaddleGlow()
     {
         GreenfootImage paddleglow = new GreenfootImage("paddleglow.png");
         setImage(paddleglow);
-    }
-    
-    public void act()
-    {
-        if (false)
-        {
-            // Gets a list of every paddle object in the world, and returns the only paddle there is present.
-            //   Thereafter, it sets the location of the glow asset to be behind the paddle, and follows the paddle's movement.
-         
-            List<PlayerPaddle> objects = getWorld().getObjects(PlayerPaddle.class);
-    
-            PlayerPaddle currentPaddle = objects.get(0);
-            int paddleX = currentPaddle.getX();
-            int paddleY = currentPaddle.getY();
-        
-            setLocation(paddleX, paddleY);
-        }
     }
 }

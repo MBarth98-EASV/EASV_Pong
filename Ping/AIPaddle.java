@@ -3,17 +3,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class AIPaddle here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class AIPaddle extends Paddle
-
-{
-    private boolean isHit = false;
-    
+{   
     public AIPaddle(SCREEN_POSITION position)
     {
-        super(position, false, HEIGHT, WIDTH);
+        super(position, false, WIDTH, HEIGHT);
     }
     
     public AIPaddle()
@@ -34,49 +35,43 @@ public class AIPaddle extends Paddle
         
         for (Actor ball : balls)
         {   
-            int dist = Math.abs(getX() - ball.getX()); 
-            if (dist > GameWorld.WORLD_HEIGHT/4 * 3 )
+            int distanceToBall = Math.abs(this.getX() - ball.getX());
+
+            if (distanceToBall < GameWorld.WORLD_HEIGHT / 4 * 3)
             {
-                isHit = false;
-            }
-            
-            if (isTouchingBall == true)
-            {
-                isHit = true;
-            }
-            
-            if ( isHit == false)
-            {
-                if (ball.getY() < this.getY())
-                {
-                    super.moveUp();
-                }
-                else
-                {
-                    super.moveDown();
-                }
+                movePaddleToCoord(ball.getX(), ball.getY());
             }
             else
             {
-                if( isHit == true)
-                {
-                    if ( getY() < GameWorld.WORLD_HEIGHT/2 )
-                    {
-                        super.moveDown();
-                    }
-                    else
-                    {   
-                        if ( getY() > GameWorld.WORLD_HEIGHT/2 )
-                        {
-                            super.moveUp();
-                        }
-                    }
-                }
-            }
-            
+                movePaddleToCenter();
+            }  
         }
     }
     
+    private void movePaddleToCoord(double x, double y)
+    {
+        if (y < this.getY())
+        {
+           super.moveUp();
+        }
+        else
+        {
+            super.moveDown();
+        }
+    }
+    
+    private void movePaddleToCenter()
+    {
+        if (getY() < GameWorld.WORLD_HEIGHT / 2)
+        {
+            super.moveDown();
+        }
+        else if (getY() > GameWorld.WORLD_HEIGHT / 2)
+        {
+            super.moveUp();
+        }
+        // else in center (do nothing)!!!
+    }
     
     /**
      * Act - do whatever the AIPaddle wants to do. This method is called whenever

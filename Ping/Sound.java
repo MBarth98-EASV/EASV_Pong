@@ -1,8 +1,13 @@
 import greenfoot.*;
+
 /**
  * Write a description of class Sound here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class Sound

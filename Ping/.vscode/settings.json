@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    "**/*.class": true,
+    "**/*.ctxt": true,
+    "project.greenfoot": true,
+    "images": true,
+    "sounds": true,
+    "README.TXT": true,
+    "doc": true
+  },
+  "java.project.referencedLibraries": [
+    "C:\\Program Files\\Greenfoot\\lib\\*"
+  ]
+}

@@ -3,21 +3,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class PlayerPaddle here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class PlayerPaddle extends Paddle
 {   
-    
-    
     public PlayerPaddle(SCREEN_POSITION position, boolean useMouse)
     {
-        super(position, useMouse, HEIGHT, WIDTH);
+        super(position, useMouse, WIDTH, HEIGHT);
     }
     
     public PlayerPaddle(SCREEN_POSITION position)
     {
-        super(position, true, HEIGHT, WIDTH);
+        super(position, true, WIDTH, HEIGHT);
     }
     
     public PlayerPaddle()
@@ -38,25 +40,25 @@ public class PlayerPaddle extends Paddle
         
         if (!this.isAxisDisabledX) // handle x component for movement
         {
-            if (xPos > super.xTarget) // mouse is the right of current position
+            if (this.xPos > super.xTarget) // mouse is to the right of current position
             {
-                xPos -= ((xPos - super.xTarget) + this.speed) * this.deltaTime; 
+                this.xPos -= ((this.xPos - super.xTarget) + this.speed) * this.deltaTime; 
             }
-            else // left side
+            else // mouse is to the right of current position
             {
-                xPos += ((super.xTarget - xPos) + this.speed) * this.deltaTime; 
+                this.xPos += ((super.xTarget - this.xPos) + this.speed) * this.deltaTime; 
             }
         }
         
         if (!this.isAxisDisabledY) // handle y component for movement
         {
-            if (yPos < super.yTarget) // mouse is below the current position
+            if (this.yPos < super.yTarget) // mouse is below the current position
             {
-                yPos -= ((yPos - super.yTarget) + this.speed) * this.deltaTime; 
+                this.yPos -= ((this.yPos - super.yTarget) + this.speed) * this.deltaTime; 
             }
-            else // above
+            else // mouse is above the current position
             {
-                yPos += ((super.yTarget - yPos) + this.speed) * this.deltaTime; 
+                this.yPos += ((super.yTarget - this.yPos) + this.speed) * this.deltaTime; 
             }
         }
     }

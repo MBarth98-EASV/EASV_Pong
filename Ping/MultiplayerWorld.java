@@ -3,11 +3,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class MultiplayerWorld here.
  * 
- * @author (your name) 
+ * @author philip esmaeel zadeh
+ * @author victor gugerel
+ * @author mads rahr mandahl-barth
+ * @author mikkel theut meier
+ * @author rasmus scherning sandbæk   
  * @version (a version number or a date)
  */
 public class MultiplayerWorld extends GameWorld
-{
+{   
+    public boolean multiPlayerActive = true;
+    
     @Override
     public void ResetBackground() {}
     public MultiplayerWorld()
@@ -26,10 +32,31 @@ public class MultiplayerWorld extends GameWorld
         */
 
         //initializeScoreCounters();
+        
+        
+        //add ball with glow effect
+            Ball ball = new Ball();
+            addObject(ball, WORLD_WIDTH/2, WORLD_HEIGHT/2);
+            ball.addGlow();
+            
+            initializePlayers();
 
         
         addObject(new ScoreCounter(), WORLD_WIDTH / 4, 80);
         addObject(new MultiScoreCounter(), (WORLD_WIDTH / 4) * 3, 80);
+    }
+    
+    private void initializePlayers()
+    {
+        Paddle playerOne     = new PlayerPaddle();
+        Paddle playerTwo     = new Player2Paddle();
+            
+        addObject(playerOne, (int)playerOne.xPos, (int)playerOne.yPos);
+        addObject(playerTwo, (int)playerTwo.xPos, (int)playerTwo.yPos);
+            
+        playerOne.addGlow();
+        playerTwo.addGlow();
+        
     }
     
     public void act()

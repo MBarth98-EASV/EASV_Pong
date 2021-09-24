@@ -11,7 +11,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class MultiplayerWorld extends GameWorld
-{
+{   
+    public boolean multiPlayerActive = true;
+    
     @Override
     public void ResetBackground() {}
     public MultiplayerWorld()
@@ -55,8 +57,6 @@ public class MultiplayerWorld extends GameWorld
         playerOne.addGlow();
         playerTwo.addGlow();
         
-        addObject(new GameLevelCounter(),(WORLD_WIDTH/4)*3, 80);
-        addObject(new GameLevelGlow(), 573, 54);
     }
     
     public void act()

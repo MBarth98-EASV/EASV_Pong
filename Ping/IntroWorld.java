@@ -16,7 +16,7 @@ public class IntroWorld extends GameWorld
     private long lastAdded = System.currentTimeMillis();
     private long lastPlayed = System.currentTimeMillis();
     private boolean textDrawn;
-    public static boolean multiPlayer = !false;
+    public static boolean multiPlayer = false;
     GreenfootImage background = new GreenfootImage("introworldbg.png");
     GreenfootSound bgmusic = new GreenfootSound("insertcoin bgmusic.wav");
     
